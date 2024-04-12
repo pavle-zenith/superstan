@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background-color: rgb(241, 245, 241);
+}
+.button-container {
+    display: inline-block;
+  }
+
+  a {
+    display:inline-block !important;
+  }
+
+  .img {
+    width:86px;
+    height:70px;
+  }
+
+  .borderss {
+    border-radius: 24px;
+  }
+  
+
+  img {
+    width:200px;
+  }
