@@ -47,7 +47,7 @@ export default function Home() {
     };
     const fetchRentListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=rent&limit=4');
+        const res = await fetch('/api/listing/get?type=Iznajmljivanje&limit=3');
         const data = await res.json();
         setRentListings(data);
         fetchSaleListings();
@@ -58,7 +58,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch('/api/listing/get?type=sale&limit=4');
+        const res = await fetch('/api/listing/get?type=Prodaja&limit=3');
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
@@ -91,11 +91,14 @@ export default function Home() {
         Usluga
         <select className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
           <option>Prodaja</option>
+
+          <option>Iznajmljivanje</option>
           {/* Other options */}
         </select>
         Tip
         <select className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-state">
           <option>Stan</option>
+          <option>Kuća</option>
           {/* Other options */}
         </select>
         Opština
@@ -175,7 +178,7 @@ export default function Home() {
           <div className=''>
             <div className='my-3'>
               <h2 className='text-2xl font-semibold text-slate-600'>Najnovije nekretnine za iznajmljivanje</h2>
-              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=rent'}>Prikaži više</Link>
+              <Link className='text-sm text-blue-800 hover:underline' to={'/search?type=Iznajmljivanje'}>Prikaži više</Link>
             </div>
             <div className='flex flex-wrap gap-4'>
               {rentListings.slice(0, 3).map((listing) => (

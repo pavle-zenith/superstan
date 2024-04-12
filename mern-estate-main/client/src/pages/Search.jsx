@@ -8,6 +8,11 @@ export default function Search() {
   const [sidebardata, setSidebardata] = useState({
     searchTerm: '',
     type: 'all',
+    sprat:'1',
+    spratTotal:'1',
+    propertyType:'Stan',
+    kvadratura:0,
+    regularPrice:0,
     parking: false,
     furnished: false,
     offer: false,
@@ -70,8 +75,8 @@ export default function Search() {
   const handleChange = (e) => {
     if (
       e.target.id === 'all' ||
-      e.target.id === 'rent' ||
-      e.target.id === 'sale'
+      e.target.id === 'Iznajmljivanje' ||
+      e.target.id === 'Prodaja'
     ) {
       setSidebardata({ ...sidebardata, type: e.target.id });
     }
@@ -146,7 +151,7 @@ export default function Search() {
             />
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Tip:</label>
+            <label className='font-semibold'>Tip Usluge:</label>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -160,20 +165,20 @@ export default function Search() {
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='rent'
+                id='Iznajmljivanje'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'rent'}
+                checked={sidebardata.type === 'Iznajmljivanje'}
               />
               <span>Iznajmljivanje</span>
             </div>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='sale'
+                id='Prodaja'
                 className='w-5'
                 onChange={handleChange}
-                checked={sidebardata.type === 'sale'}
+                checked={sidebardata.type === 'Prodaja'}
               />
               <span>Prodaja</span>
             </div>
@@ -213,36 +218,7 @@ export default function Search() {
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
             <label className='font-semibold'>Lokacija:</label>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='parking'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.parking}
-              />
-              <span>Čukarica</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Novi Beograd</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Zvezdara</span>
-            </div>
+            
             
             <div className='flex gap-2'>
               <input
@@ -284,6 +260,72 @@ export default function Search() {
               />
               <span>Voždovac</span>
             </div>
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='whitespace-nowrap font-semibold'>
+              Kvadratura:
+            </label>
+            <input
+              type='text'
+              id='searchTerm'
+              placeholder='Minimum'
+              className='border rounded-lg p-3 w-3/12'
+              // value={sidebardata.searchTerm}
+              onChange={handleChange}
+            />
+            <label className='whitespace-nowrap font-semibold'>
+              m2
+            </label>
+            <input
+              type='text'
+              id='searchTerm'
+              placeholder='Maksimum'
+              className='border rounded-lg p-3 w-3/12'
+              // value={sidebardata.searchTerm}
+              onChange={handleChange}
+            />
+            <label className='whitespace-nowrap font-semibold'>
+              m2
+            </label>
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='whitespace-nowrap font-semibold'>
+              Cena:
+            </label>
+            <input
+              type='text'
+              id='searchTerm'
+              placeholder='Minimum'
+              className='border rounded-lg p-3 w-3/12'
+              // value={sidebardata.searchTerm}
+              onChange={handleChange}
+            />
+            <label className='whitespace-nowrap font-semibold'>
+              eur
+            </label>
+            <input
+              type='text'
+              id='searchTerm'
+              placeholder='Maksimum'
+              className='border rounded-lg p-3 w-3/12'
+              // value={sidebardata.searchTerm}
+              onChange={handleChange}
+            />
+            <label className='whitespace-nowrap font-semibold'>
+              eur
+            </label>
+          </div>
+          <div className='flex items-center gap-2'>
+            <label className='font-semibold'>Tip</label>
+            <select
+              onChange={handleChange}
+              defaultValue={'created_at_desc'}
+              id='sprat'
+              className='border rounded-lg p-3'
+            >
+              <option value='regularPrice_desc'>Stan</option>
+              <option value='regularPrice_desc'>Kuća</option>
+            </select>
           </div>
           <div className='flex items-center gap-2'>
             <label className='font-semibold'>Sortiranje:</label>

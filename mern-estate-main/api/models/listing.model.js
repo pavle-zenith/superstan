@@ -58,6 +58,10 @@ const listingSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    propertyType: {
+      type: String,
+      required: false,
+    },
     offer: {
       type: Boolean,
       required: false,
