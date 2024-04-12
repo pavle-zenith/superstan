@@ -316,7 +316,7 @@ export default function Search() {
             </label>
           </div>
           <div className='flex items-center gap-2'>
-            <label className='font-semibold'>Tip</label>
+            <label className='font-semibold'>Tip:</label>
             <select
               onChange={handleChange}
               defaultValue={'created_at_desc'}

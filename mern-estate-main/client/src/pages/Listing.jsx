@@ -57,8 +57,8 @@ export default function Listing() {
         <p className='text-center my-7 text-2xl'>Something went wrong!</p>
       )}
       {listing && !loading && !error && (
-        <div>
-          <Swiper navigation>
+        <div >
+          <Swiper navigation className='max-w-6xl'>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
@@ -140,7 +140,7 @@ export default function Listing() {
                 onClick={() => setContact(true)}
                 className='bg-red-500 text-white rounded-lg mt-36 hover:opacity-95 p-3'
               >
-                Kontaktiraj Vlasnika
+                Kontakt
               </button>
               {/* <Contact listing={listing} /> */}
           </div>
