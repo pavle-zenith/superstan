@@ -180,12 +180,12 @@ export default function Profile() {
         <p className='text-sm self-center'>
           {fileUploadError ? (
             <span className='text-red-700'>
-              Error Image upload (image must be less than 2 mb)
+              Problem pri promeni slike (slika mora biti manja od 2 MB)
             </span>
           ) : filePerc > 0 && filePerc < 100 ? (
             <span className='text-slate-700'>{`Uploading ${filePerc}%`}</span>
           ) : filePerc === 100 ? (
-            <span className='text-green-700'>Image successfully uploaded!</span>
+            <span className='text-green-700'>Slika promenjena uspešno!</span>
           ) : (
             ''
           )}
@@ -217,7 +217,7 @@ export default function Profile() {
           disabled={loading}
           className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
         >
-          {loading ? 'Loading...' : 'Update'}
+          {loading ? 'Učitavanje...' : 'Ažuriraj'}
         </button>
         <Link
           className='bg-red-500 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
@@ -226,13 +226,16 @@ export default function Profile() {
           Kreiraj Oglas
         </Link>
       </form>
-      <div className='flex justify-between mt-5'>
-        <span
+      <button onClick={handleShowListings} className='bg-red-500 mt-5 text-white w-full align-middle p-3 rounded-lg uppercase text-center hover:opacity-95'>
+        Prikaži sve oglase
+      </button>
+      <div className='flex justify-centeredit mt-5'>
+        {/* <span
           onClick={handleDeleteUser}
           className='text-red-700 cursor-pointer'
         >
           Obriši profil
-        </span>
+        </span> */}
         <span onClick={handleSignOut} className='text-red-700 cursor-pointer'>
           Izloguj se
         </span>
@@ -240,19 +243,19 @@ export default function Profile() {
 
       <p className='text-red-700 mt-5'>{error ? error : ''}</p>
       <p className='text-green-700 mt-5'>
-        {updateSuccess ? 'User is updated successfully!' : ''}
+        {updateSuccess ? 'Podaci su uspešno ažurirani!' : ''}
       </p>
-      <button onClick={handleShowListings} className='text-green-700 w-full'>
+      {/* <button onClick={handleShowListings} className='bg-red-500 text-white align-middle p-3 rounded-lg uppercase text-center hover:opacity-95'>
         Prikaži sve oglase
-      </button>
+      </button> */}
       <p className='text-red-700 mt-5'>
-        {showListingsError ? 'Error showing listings' : ''}
+        {showListingsError ? 'Greška pri prikazivanju listinga' : ''}
       </p>
 
       {userListings && userListings.length > 0 && (
         <div className='flex flex-col gap-4'>
           <h1 className='text-center mt-7 text-2xl font-semibold'>
-            Your Listings
+            Vaše nekretnine
           </h1>
           {userListings.map((listing) => (
             <div
@@ -278,10 +281,10 @@ export default function Profile() {
                   onClick={() => handleListingDelete(listing._id)}
                   className='text-red-700 uppercase'
                 >
-                  Delete
+                  Obriši
                 </button>
                 <Link to={`/update-listing/${listing._id}`}>
-                  <button className='text-green-700 uppercase'>Edit</button>
+                  <button className='text-green-700 uppercase'>Izmeni</button>
                 </Link>
               </div>
             </div>

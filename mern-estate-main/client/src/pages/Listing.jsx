@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore from 'swiper';
 import { useSelector } from 'react-redux';
 import { Navigation } from 'swiper/modules';
+import Footer from './Footer';
 import 'swiper/css/bundle';
 import {
   FaBath,
@@ -58,7 +59,7 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div >
-          <Swiper navigation className='max-w-6xl'>
+          <Swiper navigation className='max-w-6xl rounded-md mt-10'>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
@@ -88,17 +89,17 @@ export default function Listing() {
               Link copied!
             </p>
           )}
-          <div className='flex flex-col max-w-4xl mx-auto p-3 my-7 gap-4'>
+          <div className='flex flex-col max-w-6xl mx-auto p-3 my-5 gap-4'>
             <p className='text-2xl font-semibold'>
-              {listing.name} - ${' '}
+              {listing.name} - €{' '}
               {listing.offer
                 ? listing.discountPrice.toLocaleString('en-US')
                 : listing.regularPrice.toLocaleString('en-US')}
               {listing.type === 'mesečno' && ' / mesečno'}
             </p>
-            <p className='flex items-center mt-6 gap-2 text-slate-600  text-sm'>
+            <p className='flex items-center mt-3 gap-2 text-slate-900 font-semibold text-md'>
               <FaMapMarkerAlt className='text-red-700' />
-              {listing.address}
+              {listing.address} - {listing.opstina}
             </p>
             <div className='flex gap-4'>
               <p className='bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md'>
@@ -114,19 +115,36 @@ export default function Listing() {
               <span className='font-semibold text-black'>Opis:<br></br> </span>
               {listing.description}
             </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Vrsta Nekretine: </span>
+              {listing.propertyType}
+            </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Kvadratura: </span>
+              {listing.kvadratura}m2
+            </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Opština: </span>
+              {listing.opstina}
+            </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Vrsta grejanja: </span>
+              {listing.heatingType}
+            </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Sprat:  </span>
+              {listing.sprat}
+            </p>
+            <p className='text-slate-800'>
+              <span className='font-semibold text-black'>Broj soba:  </span>
+              {listing.bathrooms}
+            </p>
             <ul className='text-red-600 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6'>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
-                <FaBed className='text-lg' />
-                {listing.bedrooms > 1
-                  ? `${listing.bedrooms} kreveta `
-                  : `${listing.bedrooms} krevet `}
+              
+            <li className='flex items-center gap-1 whitespace-nowrap '>
+            <span className='font-semibold text-black'>Ostalo:  </span>
               </li>
-              <li className='flex items-center gap-1 whitespace-nowrap '>
-                <FaBath className='text-lg' />
-                {listing.bathrooms > 1
-                  ? `${listing.bathrooms} kupatila `
-                  : `${listing.bathrooms} kupatilo `}
-              </li>
+              
               <li className='flex items-center gap-1 whitespace-nowrap '>
                 <FaParking className='text-lg' />
                 {listing.parking ? 'Parking Mesto' : 'Nema Parking'}
@@ -138,7 +156,7 @@ export default function Listing() {
             </ul>
             <button
                 onClick={() => setContact(true)}
-                className='bg-red-500 text-white rounded-lg mt-36 hover:opacity-95 p-3'
+                className='bg-red-500 text-white rounded-lg mt-19 mb-20 hover:opacity-95 p-3'
               >
                 Kontakt
               </button>
@@ -146,6 +164,7 @@ export default function Listing() {
           </div>
         </div>
       )}
+      <Footer></Footer>
     </main>
   );
 }

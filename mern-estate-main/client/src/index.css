@@ -1,7 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+:root {
+  --swiper-theme-color: red;
+}
 body{
     background-color: rgb(241, 245, 241);
 }
