@@ -10,12 +10,7 @@ export default function footer() {
           <img className='footerimg' src="https://i.imgur.com/Q1ig12D.jpeg" alt="" />
           
         </div>
-        <p className="mt-4 max-w-xs text-gray-500">
-          Adresa: Španskih boraca 24v lokal, Novi Beograd <br></br>
-          Kontakt Telefon: 063413113<br></br>
-          E-mail: office@superstanbg.rs
-
-        </p>
+       
         <ul className="mt-8 flex gap-6">
           <li>
             <a
@@ -67,6 +62,20 @@ export default function footer() {
         </ul>
       </div>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+      <div>
+          <p className="font-medium text-gray-900">SuperStan</p>
+          <ul className="mt-6 mr-8 space-y-4 text-sm">
+            <li>
+            <p className="mt-4 max-w-xs text-gray-500">
+          Adresa: Španskih boraca 24v lokal, Novi Beograd <br></br>
+          Kontakt Telefon: 063413113<br></br>
+          E-mail: office@superstanbg.rs
+
+        </p>
+            </li>
+            
+          </ul>
+        </div>
         <div>
           <p className="font-medium text-gray-900">Korisni Linkovi</p>
           <ul className="mt-6 space-y-4 text-sm">
@@ -85,14 +94,14 @@ export default function footer() {
             <li>
               <a href="#" className="text-gray-700 transition hover:opacity-75">
                 {" "}
-                Kontakt informacije{" "}
+                Kontakt{" "}
               </a>
             </li>
             
           </ul>
         </div>
         <div>
-          <p className="font-medium text-gray-900">SuperStan</p>
+          <p className="font-medium text-gray-900">Mapa Sajta</p>
           <ul className="mt-6 space-y-4 text-sm">
             <li>
               <a href="#" className="text-gray-700 transition hover:opacity-75">
@@ -114,35 +123,14 @@ export default function footer() {
             </li>
           </ul>
         </div>
-        <div>
-          <p className="font-medium text-gray-900">Helpful Links</p>
-          <ul className="mt-6 space-y-4 text-sm">
-            <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Contact{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                FAQs{" "}
-              </a>
-            </li>
-            <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Live Chat{" "}
-              </a>
-            </li>
-          </ul>
-        </div>
+        
         
       </div>
     </div>
     <p className="text-xs text-gray-500">
       © 2024. SuperStan d.o.o PIB: 114115868
           Matični Broj: 673353350
+          | Powered by <a href="https://www.9320.tech/">Tech9320</a> 
     </p>
   </div>
 </footer>

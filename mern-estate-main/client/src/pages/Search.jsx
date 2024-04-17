@@ -60,11 +60,13 @@ export default function Search() {
       const searchQuery = urlParams.toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
-      if (data.length > 8) {
-        setShowMore(true);
-      } else {
-        setShowMore(false);
-      }
+      console.log(data);
+      console.log(searchQuery)
+      // if (data.length > 8) {
+      //   setShowMore(true);
+      // } else {
+      //   setShowMore(false);
+      // }
       setListings(data);
       setLoading(false);
     };
@@ -439,7 +441,7 @@ export default function Search() {
           )}
         </div>
       </div>
-      
+      {/* <Footer></Footer> */}
     </div>
   );
 }

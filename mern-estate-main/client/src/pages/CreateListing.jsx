@@ -232,7 +232,7 @@ export default function CreateListing() {
                 id='sale'
                 className='w-5'
                 onChange={handleChange}
-                checked={formData.type === 'sale'}
+                checked={formData.type === 'Prodaja'}
               />
               <span>Izdavanje</span>
             </div>
@@ -242,7 +242,7 @@ export default function CreateListing() {
                 id='rent'
                 className='w-5'
                 onChange={handleChange}
-                checked={formData.type === 'rent'}
+                checked={formData.type === 'Iznajmljivanje'}
               />
               <span>Prodaja</span>
             </div>
