@@ -30,7 +30,7 @@ export default function Home() {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
-  console.log(offerListings);
+  // console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -46,8 +46,11 @@ export default function Home() {
       try {
         const res = await fetch("/api/listing/get?type=Iznajmljivanje&limit=3");
         const data = await res.json();
+        console.log("xd")
+        console.log(data);
         setRentListings(data);
         fetchSaleListings();
+        
       } catch (error) {
         console.log(error);
       }
@@ -63,6 +66,7 @@ export default function Home() {
       }
     };
     fetchOfferListings();
+    console.log(rentListings)
   }, []);
   return (
     <div>
@@ -172,7 +176,7 @@ export default function Home() {
 
       {/* listing results for offer, sale and rent */}
 
-      <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
+      <div className="listingContainer max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
         {offerListings && offerListings.length > 0 && (
           <div className="">
             <div className="flexmy-3">
@@ -180,7 +184,7 @@ export default function Home() {
                 Najnovije nekretnine
               </h2>
               <Link
-                className="text-sm text-blue-800 hover:underline"
+                className="text-sm text-red-800 hover:underline"
                 to={"/search?offer=true"}
               >
                 Prikaži više
@@ -234,11 +238,11 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="borderss shadow-md overflow-hidden max-w-6xl mx-auto bg-white py-15 mb-20 sm:py-32">
-        <div className="mx-auto max-w-6xl px-6 lg:px-8"  style={{
+      <div className="borderss shadow-md overflow-hidden max-w-6xl mx-auto bg-white py-15 mb-20 sm:py-9">
+        <div className="aboutContainer mx-auto max-w-6xl px-6 lg:px-8"  style={{
                 paddingRight:"0",
               }}>
-          <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+          <div className="about mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
             <div className="lg:pr-8 lg:pt-4">
               <div className="lg:max-w-lg">
                 <h2 className="text-base font-semibold leading-7 text-red-600">
@@ -288,7 +292,7 @@ export default function Home() {
               }}
               src="https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="Product screenshot"
-              className="w-[48rem] max-w-none rounded-xl border-3 border-red-500 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem] md:-ml-4 lg:-ml-0"
+              className="aboutImg w-[48rem] max-w-none rounded-xl border-3 border-red-500 shadow-xl ring-1 ring-gray-400/10 sm:w-[100%] md:-ml-4 lg:-ml-0"
               
             />
           </div>
@@ -302,7 +306,7 @@ export default function Home() {
           backgroundRepeat: "no-repeat",
           borderRadius: "24px",
         }}
-        className="flex text-center mt-10 mb-20 flex-col gap-6 p-28 px-3 max-w-6xl mx-auto"
+        className="cta flex text-center mt-10 mb-20 flex-col gap-6 p-28 px-3 max-w-6xl mx-auto"
       >
         <h1 className="text-white font-bold text-3xl lg:text-6xl">
           Otkrijte nekretninu iz snova

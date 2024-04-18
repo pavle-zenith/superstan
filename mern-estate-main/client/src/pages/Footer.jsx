@@ -4,7 +4,7 @@ export default function footer() {
   return (
     <footer className="bg-white">
   <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
-    <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+    <div className="grid grid-cols-1 lg:grid-cols-3">
       <div>
         <div className="text-teal-600">
           <img className='footerimg' src="https://i.imgur.com/Q1ig12D.jpeg" alt="" />
@@ -14,12 +14,13 @@ export default function footer() {
         <ul className="mt-8 flex gap-6">
           <li>
             <a
-              href="#"
+              href="https://www.facebook.com/superstannekretnine"
               rel="noreferrer"
               target="_blank"
               className="text-gray-700 transition hover:opacity-75"
             >
-              <span className="sr-only">Facebook</span>
+              <span className="sr-only"><a href='https://www.instagram.com/superstannekretnine/'>Facebook</a></span>
+              
               <svg
                 className="h-6 w-6"
                 fill="currentColor"
@@ -36,12 +37,12 @@ export default function footer() {
           </li>
           <li>
             <a
-              href="#"
+              href="https://www.instagram.com/superstannekretnine/"
               rel="noreferrer"
               target="_blank"
               className="text-gray-700 transition hover:opacity-75"
             >
-              <span className="sr-only">Instagram</span>
+              <span className="sr-only"> <a href='https://www.instagram.com/superstannekretnine/'>Instagram</a></span>
               <svg
                 className="h-6 w-6"
                 fill="currentColor"
@@ -61,7 +62,7 @@ export default function footer() {
          
         </ul>
       </div>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
+      <div className="footerFix grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
       <div>
           <p className="font-medium text-gray-900">SuperStan</p>
           <ul className="mt-6 mr-8 space-y-4 text-sm">
@@ -79,12 +80,7 @@ export default function footer() {
         <div>
           <p className="font-medium text-gray-900">Korisni Linkovi</p>
           <ul className="mt-6 space-y-4 text-sm">
-            <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Politika privatnosti{" "}
-              </a>
-            </li>
+            
             <li>
               <a href="#" className="text-gray-700 transition hover:opacity-75">
                 {" "}

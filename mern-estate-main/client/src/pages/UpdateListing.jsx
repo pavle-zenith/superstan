@@ -67,11 +67,11 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError('Image upload failed (2 mb max per image)');
+          setImageUploadError('2mb je maksimalno dozvoljeno po slici');
           setUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 6 images per listing');
+      setImageUploadError('Možete okačiti ukupno 6 slika');
       setUploading(false);
     }
   };
@@ -87,7 +87,7 @@ export default function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          console.log(`Upload je ${progress}% završen`);
         },
         (error) => {
           reject(error);
@@ -143,9 +143,9 @@ export default function CreateListing() {
     e.preventDefault();
     try {
       if (formData.imageUrls.length < 1)
-        return setError('You must upload at least one image');
+        return setError('Morate okačiti najmanje jednu sliku');
       if (+formData.regularPrice < +formData.discountPrice)
-        return setError('Discount price must be lower than regular price');
+        return setError('Cena na popustu mora biti manja od originalne cene');
       setLoading(true);
       setError(false);
       const res = await fetch(`/api/listing/update/${params.listingId}`, {
@@ -178,7 +178,7 @@ export default function CreateListing() {
         <div className='flex flex-col gap-4 flex-1'>
           <input
             type='text'
-            placeholder='Name'
+            placeholder='Naziv'
             className='border p-3 rounded-lg'
             id='name'
             maxLength='62'
@@ -189,18 +189,18 @@ export default function CreateListing() {
           />
           <textarea
             type='text'
-            placeholder='Description'
+            placeholder='Opis'
             className='border p-3 rounded-lg'
-            id='description'
+            id='Opis'
             required
             onChange={handleChange}
             value={formData.description}
           />
           <input
             type='text'
-            placeholder='Address'
+            placeholder='Adresa'
             className='border p-3 rounded-lg'
-            id='address'
+            id='Adresa'
             required
             onChange={handleChange}
             value={formData.address}
@@ -209,22 +209,22 @@ export default function CreateListing() {
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='sale'
+                id='Prodaja'
                 className='w-5'
                 onChange={handleChange}
-                checked={formData.type === 'sale'}
+                checked={formData.type === 'Prodaja'}
               />
-              <span>Sell</span>
+              <span>Prodaja</span>
             </div>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='rent'
+                id='Iznajmljivanje'
                 className='w-5'
                 onChange={handleChange}
-                checked={formData.type === 'rent'}
+                checked={formData.type === 'Iznajmljivanje'}
               />
-              <span>Rent</span>
+              <span>Iznajmljivanje</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -234,17 +234,17 @@ export default function CreateListing() {
                 onChange={handleChange}
                 checked={formData.parking}
               />
-              <span>Parking spot</span>
+              <span>Parking</span>
             </div>
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='furnished'
+                id='opremljen'
                 className='w-5'
                 onChange={handleChange}
                 checked={formData.furnished}
               />
-              <span>Furnished</span>
+              <span>Opremljen</span>
             </div>
             <div className='flex gap-2'>
               <input
@@ -316,8 +316,8 @@ export default function CreateListing() {
                 />
                 <div className='flex flex-col items-center'>
                   <p>Discounted price</p>
-                  {formData.type === 'rent' && (
-                    <span className='text-xs'>($ / month)</span>
+                  {formData.type === 'Iznajmljivanje' && (
+                    <span className='text-xs'>(€ / mesečno)</span>
                   )}
                 </div>
               </div>
@@ -326,9 +326,9 @@ export default function CreateListing() {
         </div>
         <div className='flex flex-col flex-1 gap-4'>
           <p className='font-semibold'>
-            Images:
+            Slike:
             <span className='font-normal text-gray-600 ml-2'>
-              The first image will be the cover (max 6)
+              Prva slika će biti naslovna (maksimum 6)
             </span>
           </p>
           <div className='flex gap-4'>
@@ -346,7 +346,7 @@ export default function CreateListing() {
               onClick={handleImageSubmit}
               className='p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80'
             >
-              {uploading ? 'Uploading...' : 'Upload'}
+              {uploading ? 'Učitavanje...' : 'Učitano'}
             </button>
           </div>
           <p className='text-red-700 text-sm'>
@@ -376,7 +376,7 @@ export default function CreateListing() {
             disabled={loading || uploading}
             className='p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80'
           >
-            {loading ? 'Updating...' : 'Update listing'}
+            {loading ? 'Učitavanje...' : 'Učitano'}
           </button>
           {error && <p className='text-red-700 text-sm'>{error}</p>}
         </div>

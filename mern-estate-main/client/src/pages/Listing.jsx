@@ -59,7 +59,15 @@ export default function Listing() {
       )}
       {listing && !loading && !error && (
         <div >
+          
           <Swiper navigation className='max-w-6xl rounded-md mt-10'>
+          <p className='text-2xl font-semibold'>
+              {listing.name} - €{' '}
+              {listing.offer
+                ? listing.discountPrice.toLocaleString('en-US')
+                : listing.regularPrice.toLocaleString('en-US')}
+              {listing.type === 'mesečno' && ' / mesečno'}
+            </p>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
@@ -90,13 +98,7 @@ export default function Listing() {
             </p>
           )}
           <div className='flex flex-col max-w-6xl mx-auto p-3 my-5 gap-4'>
-            <p className='text-2xl font-semibold'>
-              {listing.name} - €{' '}
-              {listing.offer
-                ? listing.discountPrice.toLocaleString('en-US')
-                : listing.regularPrice.toLocaleString('en-US')}
-              {listing.type === 'mesečno' && ' / mesečno'}
-            </p>
+            
             <p className='flex items-center mt-3 gap-2 text-slate-900 font-semibold text-md'>
               <FaMapMarkerAlt className='text-red-700' />
               {listing.address} - {listing.opstina}

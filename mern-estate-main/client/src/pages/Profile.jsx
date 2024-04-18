@@ -213,12 +213,12 @@ export default function Profile() {
           id='password'
           className='border p-3 rounded-lg'
         />
-        <button
+        {/* <button
           disabled={loading}
           className='bg-slate-700 text-white rounded-lg p-3 uppercase hover:opacity-95 disabled:opacity-80'
         >
           {loading ? 'Učitavanje...' : 'Ažuriraj'}
-        </button>
+        </button> */}
         <Link
           className='bg-red-500 text-white p-3 rounded-lg uppercase text-center hover:opacity-95'
           to={'/create-listing'}
