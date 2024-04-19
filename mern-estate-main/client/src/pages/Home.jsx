@@ -88,66 +88,66 @@ export default function Home() {
         <div className="text-gray-100 text-xs sm:text-sm">
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
-        <div className="flex items-center justify-center">
-          <div className="bg-white w-2/5 p-2 flex justify-between items-center rounded">
-            <div className="flex pl-4 pr-4 items-center gap-5">
-              Usluga
-              <select
-                className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>Prodaja</option>
+        <div className="flex items-center justify-center p-4">
+  <div className="bg-white max-w-xs md:max-w-lg p-2 flex flex-col md:flex-row justify-between items-center rounded w-full">
+    <div className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
+      <label className="flex flex-col items-start w-full">
+        <span className="text-gray-700">Usluga</span>
+        <select
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          id="grid-state"
+        >
+          <option>Prodaja</option>
+          <option>Iznajmljivanje</option>
+          {/* Other options */}
+        </select>
+      </label>
+      <label className="flex flex-col items-start w-full">
+        <span className="text-gray-700">Tip</span>
+        <select
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          id="grid-state"
+        >
+          <option>Stan</option>
+          <option>Kuća</option>
+          {/* Other options */}
+        </select>
+      </label>
+      <label className="flex flex-col items-start w-full">
+        <span className="text-gray-700">Opština</span>
+        <select
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          id="grid-state"
+        >
+          <option>Voždovac</option>
+        <option>Čukarica</option>
+        <option>Novi Beograd</option>
+        <option>Palilula</option>
+        <option>Rakovica</option>
+        <option>Surčin</option>
+        <option>Savski Venac</option>
+        <option>Stari Grad</option>
+        <option>Vračar</option>
+        <option>Zemun</option>
+        <option>Zvezdara</option>
+        <option>Barajevo</option>
+        <option>Grocka</option>
+        <option>Mladenovac</option>
+        <option>Lazarevac</option>
+        <option>Obrenovac</option>
+        <option>Surčin</option>
+        <option>Sopot</option>
+        </select>
+      </label>
+    </div>
+    <button className="bg-red-700 p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0">
+      <FaSearch className="text-white"></FaSearch>
+    </button>
+  </div>
+</div>
 
-                <option>Iznajmljivanje</option>
-                {/* Other options */}
-              </select>
-              Tip
-              <select
-                className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>Stan</option>
-                <option>Kuća</option>
-                {/* Other options */}
-              </select>
-              Opština
-              <select
-                className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-state"
-              >
-                <option>Voždovac</option>
-                <option>Čukarica</option>
-                <option>Novi Beograd</option>
-                <option>Palilula</option>
-                <option>Rakovica</option>
-                <option>Surčin</option>
-                <option>Savski Venac</option>
-                <option>Stari Grad</option>
-                <option>Vračar</option>
-                <option>Zemun</option>
-                <option>Zvezdara</option>
-                <option>Barajevo</option>
-                <option>Grocka</option>
-                <option>Mladenovac</option>
-                <option>Lazarevac</option>
-                <option>Obrenovac</option>
-                <option>Surčin</option>
-                <option>Sopot</option>
-                {/* Other options */}
-              </select>
-            </div>
-            <button className="bg-red-700 p-2 focus:outline-none rounded focus:shadow-outline">
-              <svg
-                className="fill-white w-6 h-6"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                <path d="M10,2A8,8,0,1,0,18,10,8,8,0,0,0,10,2Zm0,14a6,6,0,1,1,6-6A6,6,0,0,1,10,16Z" />
-                <path d="M21,20a1,1,0,0,0-1-.87H20l-.29-.29a1,1,0,0,0-1.42,0l-2,2a1,1,0,0,0,0,1.42,1,1,0,0,0,.71.29,1,1,0,0,0,.71-.29l2-2Z" />
-              </svg>
-            </button>
-          </div>
-        </div>
+
+        
         <Link
           to={"/search"}
           className="button-container mx-auto flex-none  bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
