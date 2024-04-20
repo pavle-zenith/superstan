@@ -33,6 +33,7 @@ a {
 .cenaDetail {
   top:0;
 }
+
 .cena, .cenaDetail {
   position: absolute;
   color: #fff;
@@ -69,4 +70,11 @@ img {
   .aboutContainer {
     padding-right: 1.5rem !important;
   }
+}
+@media (min-width: 1500px) {
+
+  .karte {
+    grid-template-columns: repeat(3, minmax(0, 0.25fr)) !important;
+  }
+  
 }

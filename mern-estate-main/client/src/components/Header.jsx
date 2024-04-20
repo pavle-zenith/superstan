@@ -59,7 +59,7 @@ export default function Header() {
           </Link>
           <Link
           to={'/kontakt'} 
-          className='button-container mx-auto flex-none items-center bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+          className='button-container mx-auto flex-none items-center bg-superstan hover:bg-red-500 text-white font-bold py-2 px-4 rounded'
         ><p className=" inline-block">Kontakt</p>
           
         </Link>

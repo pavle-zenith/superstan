@@ -67,11 +67,11 @@ export default function Listing() {
         <div>
           <Swiper navigation className="slajder max-w-6xl rounded-md mt-10">
           <p className="cenaDetail text-2xl font-semibold">
-              {listing.name} - €{" "}
+              
               {listing.offer
                 ? listing.discountPrice.toLocaleString("en-US")
                 : listing.regularPrice.toLocaleString("en-US")}
-              {listing.type === "mesečno" && " / mesečno"}
+              {listing.type === "mesečno" && " / mesečno"} €
             </p>
             {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
@@ -103,27 +103,27 @@ export default function Listing() {
             </p>
           )}
           <div className="flex flex-col max-w-6xl mx-auto p-3 my-5 gap-4">
-            <div className="flex justify-between">
-          <p className="text-2xl font-semibold">
-              {listing.name}
-            </p>
-            <button
-              onClick={() => setContact(true)}
-              className="bg-red-500 text-white rounded-lg hover:opacity-95 p-3 px-20"
-            >
-              Kontakt
-            </button>
-            </div>
+          <div className="flex flex-col sm:flex-row justify-between items-center">
+  <p className="text-2xl font-semibold self-start mb-4 sm:mb-0">
+    {listing.name}
+  </p>
+  <button
+    onClick={() => setContact(true)}
+    className="bg-superstan text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
+    Kontakt
+  </button>
+</div>
+
             <p className="flex items-center mt-1 gap-2 text-slate-900 font-semibold text-lg">
-              <FaMapMarkerAlt className="text-red-700" />
+              <FaMapMarkerAlt className="text-superstan" />
               {listing.address} - {listing.opstina}
             </p>
             <div className="flex gap-4">
-              <p className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+              <p className="bg-superstan w-full max-w-[200px] text-white text-center p-1 rounded-md">
                 {listing.type === "rent" ? "Iznajmljivanje" : "Prodaja"}
               </p>
               {listing.offer && (
-                <p className="bg-red-600 w-full max-w-[200px] text-white text-center p-1 rounded-md">
+                <p className="bg-superstan w-full max-w-[200px] text-white text-center p-1 rounded-md">
                   ${+listing.regularPrice - +listing.discountPrice} OFF
                 </p>
               )}
@@ -141,7 +141,7 @@ export default function Listing() {
     <div className="flex flex-wrap -m-4">
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaHome className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -156,7 +156,7 @@ export default function Listing() {
       </div>
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaBook className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -171,7 +171,7 @@ export default function Listing() {
       </div>
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaMapMarkedAlt className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -193,7 +193,7 @@ export default function Listing() {
     <div className="flex flex-wrap -m-4">
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaFireAlt className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -208,7 +208,7 @@ export default function Listing() {
       </div>
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaBuilding className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -223,7 +223,7 @@ export default function Listing() {
       </div>
       <div className="p-4 md:w-1/3 w-full">
         <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-red-500 text-white mr-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
           <FaDoorOpen className="text-lg"/>
           </div>
           <div className="flex-grow">
@@ -262,7 +262,7 @@ export default function Listing() {
               <span className="font-semibold text-black">Broj soba: </span>
               {listing.bathrooms}
             </p> */}
-            <ul className="text-red-600 font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
+            <ul className="text-superstan font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
               <li className="flex items-center gap-1 whitespace-nowrap ">
                 <span className="font-semibold text-black">Ostalo: </span>
               </li>

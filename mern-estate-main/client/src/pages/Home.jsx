@@ -89,9 +89,9 @@ export default function Home() {
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
         <div className="flex items-center justify-center p-4">
-  <div className="bg-white max-w-xs md:max-w-lg p-2 flex flex-col md:flex-row justify-between items-center rounded w-full">
+  <div className="bg-white max-w-s md:max-w-3xl p-2 flex flex-col md:flex-row justify-between items-center rounded w-full">
     <div className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
-      <label className="flex flex-col items-start w-full">
+      <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Usluga</span>
         <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
@@ -102,7 +102,7 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex flex-col items-start w-full">
+      <label className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
         <span className="text-gray-700">Tip</span>
         <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
@@ -113,7 +113,7 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex flex-col items-start w-full">
+      <label className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
         <span className="text-gray-700">Opština</span>
         <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
@@ -140,7 +140,7 @@ export default function Home() {
         </select>
       </label>
     </div>
-    <button className="bg-red-700 p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0">
+    <button className="bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0">
       <FaSearch className="text-white"></FaSearch>
     </button>
   </div>
@@ -150,7 +150,7 @@ export default function Home() {
         
         <Link
           to={"/search"}
-          className="button-container mx-auto flex-none  bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+          className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
         </Link>
@@ -274,7 +274,7 @@ export default function Home() {
                   width: "100%",
                   textAlign:"center"
                 }}
-                className="button-container mx-auto flex-none mt-5 bg-red-500 hover:bg-red-700 text-white hover:text-white font-bold py-2 px-4 rounded"
+                className="button-container mx-auto flex-none mt-5 bg-superstan hover:bg-red-700 text-white hover:text-white font-bold py-2 px-4 rounded"
               >
                 <p className="inline-block">Kontaktirajte Nas</p>
               </Link>
@@ -292,7 +292,7 @@ export default function Home() {
               }}
               src="https://images.pexels.com/photos/87223/pexels-photo-87223.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
               alt="Product screenshot"
-              className="aboutImg w-[48rem] max-w-none rounded-xl border-3 border-red-500 shadow-xl ring-1 ring-gray-400/10 sm:w-[100%] md:-ml-4 lg:-ml-0"
+              className="aboutImg w-[48rem] max-w-none rounded-xl border-3 border-superstan shadow-xl ring-1 ring-gray-400/10 sm:w-[100%] md:-ml-4 lg:-ml-0"
               
             />
           </div>
@@ -318,7 +318,7 @@ export default function Home() {
         </div>
         <Link
           to={"/search"}
-          className="button-container mx-auto flex-none  bg-white hover:bg-red-700 text-red-700 hover:text-white font-bold py-2 px-4 rounded"
+          className="button-container mx-auto flex-none  bg-white hover:bg-red-700 text-superstan hover:text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledaj ponudu</p>
         </Link>

@@ -40,14 +40,14 @@ export default function ListingItem({ listing }) {
             {`${listing.type} - ${listing.propertyType}`}
           </p>
           
-          <div className='text-white bg-red-700 rounded p-1 pl-2 pr-2 flex justify-between gap-4'>
+          <div className='text-white bg-superstan rounded p-1 pl-2 pr-2 flex justify-between gap-4'>
             <div className='font-bold text-xs'>
               {listing.furnished == true
                 ? `Opremljen `
                 : `Nije opremljen `}
             </div>
             <div className='font-bold text-xs'>
-              {`${listing.kvadratura}m2`}
+              {`${listing.kvadratura}m`} <sup>2</sup>
             </div>
             <div className='font-bold text-xs'>
             {listing.opstina}

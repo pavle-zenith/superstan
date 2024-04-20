@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
+import MultiSelectDropdown from '../components/MultiSelectDropdown';
 import Footer from './Footer.jsx';
 
 export default function Search() {
@@ -19,7 +20,7 @@ export default function Search() {
     sort: 'created_at',
     order: 'desc',
   });
-
+  const options = ['Čukarica','Novi Beograd','Paliula','Rakovica','Savski venac', 'Stari grad','Voždovac','Vračar','Zemun','Zvezdara','Barajevo','Grocka','Lazarevac','Mladenovac','Obrenovac','Sopot','Surčin'];
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [showMore, setShowMore] = useState(false);
@@ -136,9 +137,9 @@ export default function Search() {
     setListings([...listings, ...data]);
   };
   return (
-    <div className='flex flex-col md:flex-row'>
-      <div className='p-7  border-b-2 md:border-r-2 md:min-h-screen'>
-        <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+    <div className='flex flex-col lg:flex-row'>
+  <div className='p-7 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4'>
+    <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
               Termin pretrage:
@@ -219,112 +220,34 @@ export default function Search() {
             </div>
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-          <>
-  <button
-    id="dropdownCheckboxButton"
-    data-dropdown-toggle="dropdownDefaultCheckbox"
-    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-    type="button"
-  >
-    Dropdown checkbox{" "}
-    <svg
-      className="w-2.5 h-2.5 ms-3"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 10 6"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="m1 1 4 4 4-4"
-      />
-    </svg>
-  </button>
-  {/* Dropdown menu */}
-  <div
-    id="dropdownDefaultCheckbox"
-    className="z-10 hidden w-48 bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-  >
-    <ul
-      className="p-3 space-y-3 text-sm text-gray-700 dark:text-gray-200"
-      aria-labelledby="dropdownCheckboxButton"
-    >
-      <li>
-        <div className="flex items-center">
-          <input
-            id="checkbox-item-1"
-            type="checkbox"
-            defaultValue=""
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-          />
-          <label
-            htmlFor="checkbox-item-1"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Default checkbox
-          </label>
-        </div>
-      </li>
-      <li>
-        <div className="flex items-center">
-          <input
-            defaultChecked=""
-            id="checkbox-item-2"
-            type="checkbox"
-            defaultValue=""
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-          />
-          <label
-            htmlFor="checkbox-item-2"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Checked state
-          </label>
-        </div>
-      </li>
-      <li>
-        <div className="flex items-center">
-          <input
-            id="checkbox-item-3"
-            type="checkbox"
-            defaultValue=""
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-          />
-          <label
-            htmlFor="checkbox-item-3"
-            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            Default checkbox
-          </label>
-        </div>
-      </li>
-    </ul>
-  </div>
-</>
-
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Vračar</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='furnished'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.furnished}
-              />
-              <span>Voždovac</span>
-            </div>
+          {/* <MultiSelectDropdown options={options} /> */}
+          <label className="flex flex-col md:flex-row pr-4 items-center gap-5 w-full">
+        <span className="whitespace-nowrap font-semibold">Opština: </span>
+        <select
+          className="border rounded-lg p-3"
+          id="grid-state"
+        >
+          <option>Voždovac</option>
+        <option>Čukarica</option>
+        <option>Novi Beograd</option>
+        <option>Palilula</option>
+        <option>Rakovica</option>
+        <option>Surčin</option>
+        <option>Savski Venac</option>
+        <option>Stari Grad</option>
+        <option>Vračar</option>
+        <option>Zemun</option>
+        <option>Zvezdara</option>
+        <option>Barajevo</option>
+        <option>Grocka</option>
+        <option>Mladenovac</option>
+        <option>Lazarevac</option>
+        <option>Obrenovac</option>
+        <option>Surčin</option>
+        <option>Sopot</option>
+        </select>
+      </label>
+            
           </div>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
@@ -339,7 +262,7 @@ export default function Search() {
               onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
-              m2
+            m<sup>2</sup>
             </label>
             <input
               type='text'
@@ -350,7 +273,7 @@ export default function Search() {
               onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
-              m2
+            m<sup>2</sup>
             </label>
           </div>
           <div className='flex items-center gap-2'>
@@ -366,7 +289,7 @@ export default function Search() {
               onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
-              eur
+            €
             </label>
             <input
               type='text'
@@ -377,7 +300,7 @@ export default function Search() {
               onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
-              eur
+            €
             </label>
           </div>
           <div className='flex items-center gap-2'>
@@ -406,42 +329,41 @@ export default function Search() {
               <option value='createdAt_asc'>Najstariji</option>
             </select>
           </div>
-          <button className='bg-red-500 text-white p-3 rounded-lg hover:opacity-95'>
+          <button className='bg-superstan text-white p-3 rounded-lg hover:opacity-95'>
             Pretraga
           </button>
-        </form>
-      </div>
-      <div className='flex-1'>
-        <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5'>
-          Rezultati pretrage:
-        </h1>
-        <div className='p-7 flex flex-wrap gap-4'>
-          {!loading && listings.length === 0 && (
-            <p className='text-xl text-slate-700'>Nije pronađena nijedna nekretnina!</p>
-          )}
-          {loading && (
-            <p className='text-xl text-slate-700 text-center w-full'>
-              Učitavanje...
-            </p>
-          )}
-
-          {!loading &&
-            listings &&
-            listings.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
-            ))}
-
-          {showMore && (
-            <button
-              onClick={onShowMoreClick}
-              className='text-red-700 hover:underline p-7 text-center w-full'
-            >
-              Prikaži više
-            </button>
-          )}
-        </div>
-      </div>
-      {/* <Footer></Footer> */}
+          </form>
+          </div>
+  <div className='flex-1 lg:w-3/4'>
+    <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5 lg:mt-0'>
+      Rezultati pretrage:
+    </h1>
+    <div className='p-7 grid karte grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-2 gap-4'>
+      {!loading && listings.length === 0 && (
+        <p className='text-xl text-slate-700'>Nije pronađena nijedna nekretnina!</p>
+      )}
+      {loading && (
+        <p className='text-xl text-slate-700 text-center w-full'>
+          Učitavanje...
+        </p>
+      )}
+      {!loading &&
+        listings &&
+        listings.map((listing) => (
+          <div key={listing._id} className=''>
+            <ListingItem listing={listing} />
+          </div>
+        ))}
+      {showMore && (
+        <button
+          onClick={onShowMoreClick}
+          className='text-red-700 hover:underline p-7 text-center w-full'
+        >
+          Prikaži više
+        </button>
+      )}
     </div>
+  </div>
+</div>
   );
 }
