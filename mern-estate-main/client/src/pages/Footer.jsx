@@ -1,9 +1,10 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 export default function footer() {
   return (
     <footer className="bg-white">
-  <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+  <div className="footerSpacingFix mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-8 lg:px-8">
     <div className="grid grid-cols-1 lg:grid-cols-3">
       <div>
         <div className="text-teal-600">
@@ -11,7 +12,7 @@ export default function footer() {
           
         </div>
        
-        <ul className="mt-8 flex gap-6">
+        <ul className="mt-2 flex gap-6">
           <li>
             <a
               href="https://www.facebook.com/superstannekretnine"
@@ -88,10 +89,12 @@ export default function footer() {
               </a>
             </li>
             <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Kontakt{" "}
-              </a>
+            <Link className="text-gray-700 transition hover:opacity-75" to={"/kontakt"}>
+                
+                 
+                Kontakt
+              
+            </Link>
             </li>
             
           </ul>
@@ -100,22 +103,20 @@ export default function footer() {
           <p className="font-medium text-gray-900">Mapa Sajta</p>
           <ul className="mt-6 space-y-4 text-sm">
             <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Početna{" "}
-              </a>
+              <Link className="text-gray-700 transition hover:opacity-75" to={"/"}>
+                
+                 
+                  Početna
+                
+              </Link>
+              
             </li>
+            
             <li>
-              <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                O nama{" "}
-              </a>
-            </li>
-            <li>
-            <a href="#" className="text-gray-700 transition hover:opacity-75">
-                {" "}
-                Sve Nekretnine{" "}
-              </a>
+            <Link className="text-gray-700 transition hover:opacity-75" to={"/nekretnine"}>
+                              
+                 Sve Nekretnine
+                              </Link>
             </li>
           </ul>
         </div>

@@ -149,7 +149,7 @@ export default function Home() {
 
         
         <Link
-          to={"/search"}
+          to={"/nekretnine"}
           className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
@@ -185,7 +185,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/search?offer=true"}
+                to={"/nekretnine?offer=true"}
               >
                 Prikaži više
               </Link>
@@ -205,7 +205,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/search?type=Iznajmljivanje"}
+                to={"/nekretnine?type=Iznajmljivanje"}
               >
                 Prikaži više
               </Link>
@@ -225,7 +225,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/search?type=sale"}
+                to={"/nekretnine?type=sale"}
               >
                 Prikaži više
               </Link>
@@ -256,20 +256,19 @@ export default function Home() {
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.
                 </p>
-                <dl className="mt-5 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
-                  {features.map((feature) => (
-                    <div key={feature.name} className="relative">
-                      <dt className="inline font-semibold text-gray-900">
-                        {/* <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true" /> */}
-                        {feature.name}
-                      </dt>{" "}
-                      <dd className="inline">{feature.description}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Maiores impedit perferendis suscipit eaque, iste dolor
+                  cupiditate blanditiis ratione.
+                </p>
+                <p className="mt-6 text-lg leading-8 text-gray-600">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+                  Maiores impedit perferendis suscipit eaque, iste dolor
+                  cupiditate blanditiis ratione.
+                </p>
               </div>
               <Link
-                to={"/search"}
+                to={"/kontakt"}
                 style={{
                   width: "100%",
                   textAlign:"center"
@@ -317,7 +316,7 @@ export default function Home() {
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
         <Link
-          to={"/search"}
+          to={"/nekretnine"}
           className="button-container mx-auto flex-none  bg-white hover:bg-red-700 text-superstan hover:text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledaj ponudu</p>

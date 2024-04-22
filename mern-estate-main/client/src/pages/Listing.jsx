@@ -56,7 +56,9 @@ export default function Listing() {
     };
     fetchListing();
   }, [params.listingId]);
-
+  function handleCall() {
+    window.location.href = 'tel:+38163413113';
+  }
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Učitavanje...</p>}
@@ -85,7 +87,7 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          <div className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
+          {/* <div className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
             <FaShare
               className="text-slate-500"
               onClick={() => {
@@ -101,16 +103,16 @@ export default function Listing() {
             <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
               Link copied!
             </p>
-          )}
+          )} */}
           <div className="flex flex-col max-w-6xl mx-auto p-3 my-5 gap-4">
           <div className="flex flex-col sm:flex-row justify-between items-center">
   <p className="text-2xl font-semibold self-start mb-4 sm:mb-0">
     {listing.name}
   </p>
   <button
-    onClick={() => setContact(true)}
+    onClick={() => handleCall()}
     className="bg-superstan text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
-    Kontakt
+    Kontakt Telefon
   </button>
 </div>
 
@@ -239,7 +241,43 @@ export default function Listing() {
     </div>
   </div>
 </section>
-
+<section className="text-gray-400 body-font">
+  <div className="container mx-auto mb-5">
+    <div className="flex flex-wrap -m-4">
+      <div className="p-4 md:w-1/3 w-full">
+        <div className="bg-white rounded-lg flex items-center p-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+          <FaChair className="text-lg"/>
+          </div>
+          <div className="flex-grow">
+            <h2 className="text-black font-medium text-lg title-font">
+              Opremljen:
+            </h2>
+            <p className="leading-relaxed text-base">
+            {listing.furnished ? "Opremljen" : "Neopremljen"}
+            </p>
+          </div>
+        </div>
+      </div>
+      
+      <div className="p-4 md:w-1/3 w-full">
+        <div className="bg-white rounded-lg flex items-center p-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+          <FaParking  className="text-lg"/>
+          </div>
+          <div className="flex-grow">
+            <h2 className="text-black font-medium text-lg title-font">
+              Parking:
+            </h2>
+            <p className="leading-relaxed text-base">
+            {listing.parking ? "Parking Mesto" : "Nema Parking"}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
             {/* <p className="text-slate-800">
               <span className="font-semibold text-black">Kvadratura: </span>
@@ -262,7 +300,7 @@ export default function Listing() {
               <span className="font-semibold text-black">Broj soba: </span>
               {listing.bathrooms}
             </p> */}
-            <ul className="text-superstan font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
+            {/* <ul className="text-superstan font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
               <li className="flex items-center gap-1 whitespace-nowrap ">
                 <span className="font-semibold text-black">Ostalo: </span>
               </li>
@@ -275,7 +313,7 @@ export default function Listing() {
                 <FaChair className="text-lg" />
                 {listing.furnished ? "Opremljen" : "Neopremljen"}
               </li>
-            </ul>
+            </ul> */}
             
             {/* <Contact listing={listing} /> */}
           </div>

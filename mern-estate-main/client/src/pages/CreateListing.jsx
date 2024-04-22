@@ -36,7 +36,7 @@ export default function CreateListing() {
   const [loading, setLoading] = useState(false);
   console.log(formData);
   const handleImageSubmit = (e) => {
-    if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
+    if (files.length > 0 && files.length + formData.imageUrls.length < 16) {
       setUploading(true);
       setImageUploadError(false);
       const promises = [];
@@ -54,11 +54,11 @@ export default function CreateListing() {
           setUploading(false);
         })
         .catch((err) => {
-          setImageUploadError('Image upload failed (2 mb max per image)');
+          setImageUploadError('Nije uspelo uploadovanje slika (2 mb maksimum po slici)');
           setUploading(false);
         });
     } else {
-      setImageUploadError('You can only upload 6 images per listing');
+      setImageUploadError('Možete da okačite maksimum 15 slika po nekretnini');
       setUploading(false);
     }
   };
@@ -365,7 +365,7 @@ export default function CreateListing() {
           <p className='font-semibold'>
             Slike:
             <span className='font-normal text-gray-600 ml-2'>
-              Prva slika će biti naslovna (maks 6)
+              Prva slika će biti naslovna (maks 15)
             </span>
           </p>
           <div className='flex gap-4'>
@@ -405,7 +405,7 @@ export default function CreateListing() {
                   onClick={() => handleRemoveImage(index)}
                   className='p-3 text-red-700 rounded-lg uppercase hover:opacity-75'
                 >
-                  Delete
+                Obriši
                 </button>
               </div>
             ))}

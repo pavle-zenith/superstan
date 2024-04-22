@@ -12,7 +12,7 @@ export default function Header() {
     const urlParams = new URLSearchParams(window.location.search);
     urlParams.set('searchTerm', searchTerm);
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    navigate(`/nekretnine?${searchQuery}`);
   };
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function Header() {
             </li>
           </Link>
           
-          <Link to='/search'>
+          <Link to='/nekretnine'>
             <li className='hidden sm:inline text-slate-700 hover:underline'>
               Sve Nekretnine
             </li>
@@ -63,7 +63,7 @@ export default function Header() {
         ><p className=" inline-block">Kontakt</p>
           
         </Link>
-          <Link to='/profile'>
+          <Link to='/profil'>
             {currentUser ? (
               <img
                 className='rounded-full h-7 w-7 object-cover'

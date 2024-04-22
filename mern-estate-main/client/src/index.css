@@ -71,6 +71,13 @@ img {
     padding-right: 1.5rem !important;
   }
 }
+.spacer {
+  margin-top:2rem;
+  margin-bottom: 5rem;
+}
+.footerSpacingFix {
+  padding-bottom: 3rem !important;
+}
 @media (min-width: 1500px) {
 
   .karte {

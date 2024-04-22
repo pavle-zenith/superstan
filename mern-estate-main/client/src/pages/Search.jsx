@@ -120,7 +120,7 @@ export default function Search() {
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    navigate(`/nekretnine?${searchQuery}`);
   };
 
   const onShowMoreClick = async () => {
@@ -137,6 +137,7 @@ export default function Search() {
     setListings([...listings, ...data]);
   };
   return (
+    <div>
     <div className='flex flex-col lg:flex-row'>
   <div className='p-7 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4'>
     <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
@@ -155,7 +156,7 @@ export default function Search() {
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
             <label className='font-semibold'>Tip Usluge:</label>
-            <div className='flex gap-2'>
+            {/* <div className='flex gap-2'>
               <input
                 type='checkbox'
                 id='all'
@@ -164,7 +165,7 @@ export default function Search() {
                 checked={sidebardata.type === 'all'}
               />
               <span>Iznajmljivanje i Prodaja</span>
-            </div>
+            </div> */}
             <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -227,6 +228,8 @@ export default function Search() {
           className="border rounded-lg p-3"
           id="grid-state"
         >
+         <option disabled selected value>Izaberite opštinu</option>
+
           <option>Voždovac</option>
         <option>Čukarica</option>
         <option>Novi Beograd</option>
@@ -254,9 +257,9 @@ export default function Search() {
               Kvadratura:
             </label>
             <input
-              type='text'
+              type='number'
               id='searchTerm'
-              placeholder='Minimum'
+              placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
               onChange={handleChange}
@@ -265,9 +268,9 @@ export default function Search() {
             m<sup>2</sup>
             </label>
             <input
-              type='text'
+              type='number'
               id='searchTerm'
-              placeholder='Maksimum'
+              placeholder='max'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
               onChange={handleChange}
@@ -281,9 +284,9 @@ export default function Search() {
               Cena:
             </label>
             <input
-              type='text'
+              type='number'
               id='searchTerm'
-              placeholder='Minimum'
+              placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
               onChange={handleChange}
@@ -292,9 +295,9 @@ export default function Search() {
             €
             </label>
             <input
-              type='text'
+              type='number'
               id='searchTerm'
-              placeholder='Maksimum'
+              placeholder='max'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
               onChange={handleChange}
@@ -364,6 +367,8 @@ export default function Search() {
       )}
     </div>
   </div>
+  
 </div>
+<Footer></Footer></div>
   );
 }
