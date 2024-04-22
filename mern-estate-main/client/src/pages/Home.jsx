@@ -113,10 +113,10 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
+      <label className="flex flex-col md:flex-row pr-4 items-center gap-5 w-full">
         <span className="text-gray-700">Opština</span>
         <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
           id="grid-state"
         >
           <option>Voždovac</option>
@@ -149,7 +149,7 @@ export default function Home() {
 
         
         <Link
-          to={"/nekretnine"}
+          to={"/search"}
           className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
@@ -185,7 +185,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/nekretnine?offer=true"}
+                to={"/search?offer=true"}
               >
                 Prikaži više
               </Link>
@@ -205,7 +205,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/nekretnine?type=Iznajmljivanje"}
+                to={"/search?type=Iznajmljivanje"}
               >
                 Prikaži više
               </Link>
@@ -225,7 +225,7 @@ export default function Home() {
               </h2>
               <Link
                 className="text-sm text-red-800 hover:underline"
-                to={"/nekretnine?type=sale"}
+                to={"/search?type=sale"}
               >
                 Prikaži više
               </Link>
@@ -256,19 +256,20 @@ export default function Home() {
                   Maiores impedit perferendis suscipit eaque, iste dolor
                   cupiditate blanditiis ratione.
                 </p>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
-                <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
-                </p>
+                <dl className="mt-5 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
+                  {features.map((feature) => (
+                    <div key={feature.name} className="relative">
+                      <dt className="inline font-semibold text-gray-900">
+                        {/* <feature.icon className="absolute left-1 top-1 h-5 w-5 text-indigo-600" aria-hidden="true" /> */}
+                        {feature.name}
+                      </dt>{" "}
+                      <dd className="inline">{feature.description}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
               <Link
-                to={"/kontakt"}
+                to={"/search"}
                 style={{
                   width: "100%",
                   textAlign:"center"
@@ -316,7 +317,7 @@ export default function Home() {
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
         <Link
-          to={"/nekretnine"}
+          to={"/search"}
           className="button-container mx-auto flex-none  bg-white hover:bg-red-700 text-superstan hover:text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledaj ponudu</p>

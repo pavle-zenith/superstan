@@ -127,20 +127,21 @@ export default function Profile() {
       setShowListingsError(false);
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
-      if (!data.success) {
-        setShowListingsError(true);
-        return;
-      }
-
+      console.log("test");
+      console.log(data);
+      // if (!data.success) {
+      //   setShowListingsError(true);
+      //   return;
+      // }
       setUserListings(data);
     } catch (error) {
       console.log(error);
       setShowListingsError(true);
     }
   };
-  // useEffect(() => {
-  //   handleShowListings(); 
-  // }, []);
+  useEffect(() => {
+    handleShowListings(); 
+  }, []);
   const handleListingDelete = async (listingId) => {
     try {
       const res = await fetch(`/api/listing/delete/${listingId}`, {
