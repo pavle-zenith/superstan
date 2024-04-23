@@ -63,7 +63,7 @@ export default function Header() {
         ><p className=" inline-block">Kontakt</p>
           
         </Link>
-          <Link to='/profil'>
+          <Link to='/admin'>
             {currentUser ? (
               <img
                 className='rounded-full h-7 w-7 object-cover'

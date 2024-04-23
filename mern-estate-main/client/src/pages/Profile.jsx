@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import Footer from './Footer.jsx';
 import {
   getDownloadURL,
@@ -109,6 +110,7 @@ export default function Profile() {
 
   const handleSignOut = async () => {
     try {
+      console.log("pokrenulo se");
       dispatch(signOutUserStart());
       const res = await fetch('/api/auth/signout');
       const data = await res.json();
@@ -144,18 +146,33 @@ export default function Profile() {
   }, []);
   const handleListingDelete = async (listingId) => {
     try {
-      const res = await fetch(`/api/listing/delete/${listingId}`, {
-        method: 'DELETE',
+      Swal.fire({
+        title: "Da li ste sigurni?",
+        showDenyButton: true,
+        
+        confirmButtonText: "Obriši",
+        denyButtonText: `Otkaži`
+      }).then(async (result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire("Nekretnina uspešno izbrisana!", "", "Uspešno brisanje");
+          const res = await fetch(`/api/listing/delete/${listingId}`, {
+            method: 'DELETE',
+          });
+          const data = await res.json();
+          if (!data.success) {
+            console.log(data.message);
+            return;
+          }
+          
+          setUserListings((prev) =>
+            prev.filter((listing) => listing._id !== listingId)
+          );
+        } else if (result.isDenied) {
+          Swal.fire("Otkazali ste brisanje nekretnine", "", "Brisanje otkazano");
+        }
       });
-      const data = await res.json();
-      if (!data.success) {
-        console.log(data.message);
-        return;
-      }
-
-      setUserListings((prev) =>
-        prev.filter((listing) => listing._id !== listingId)
-      );
+      
     } catch (error) {
       console.log(error.message);
     }
@@ -212,7 +229,7 @@ export default function Profile() {
           />
           <Link
             className='bg-superstan text-white mb-4 p-3 rounded-lg uppercase text-center hover:opacity-95'
-            to={'/create-listing'}
+            to={'/kreiraj-oglas'}
           >
             Kreiraj Oglas
           </Link>

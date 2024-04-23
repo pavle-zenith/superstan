@@ -102,7 +102,7 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
+      <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Tip</span>
         <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
@@ -113,7 +113,7 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex flex-col md:flex-row pr-4 items-center gap-5 w-full">
+      <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Opština</span>
         <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
@@ -149,7 +149,7 @@ export default function Home() {
 
         
         <Link
-          to={"/search"}
+          to={"/nekretnine"}
           className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
@@ -179,7 +179,7 @@ export default function Home() {
       <div className="listingContainer max-w-6xl mx-auto p-3 flex flex-col gap-8 my-10">
         {offerListings && offerListings.length > 0 && (
           <div className="">
-            <div className="flexmy-3">
+            <div className="flex my-3">
               <h2 className="text-2xl font-semibold text-slate-600">
                 Najnovije nekretnine
               </h2>
@@ -317,7 +317,7 @@ export default function Home() {
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
         <Link
-          to={"/search"}
+          to={"/nekretnine"}
           className="button-container mx-auto flex-none  bg-white hover:bg-red-700 text-superstan hover:text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledaj ponudu</p>

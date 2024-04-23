@@ -65,7 +65,7 @@ export default function footer() {
       </div>
       <div className="footerFix grid grid-cols-1 gap-8 sm:grid-cols-2 lg:col-span-2 lg:grid-cols-4">
       <div>
-          <p className="font-medium text-gray-900">SuperStan</p>
+          <p className="font-medium text-gray-900">Super Stan</p>
           <ul className="mt-6 mr-8 space-y-4 text-sm">
             <li>
             <p className="mt-4 max-w-xs text-gray-500">
@@ -125,7 +125,7 @@ export default function footer() {
       </div>
     </div>
     <p className="text-xs text-gray-500">
-      © 2024. SuperStan d.o.o PIB: 114115868
+      © 2024. Super Stan d.o.o PIB: 114115868
           Matični Broj: 673353350
           | Powered by <a href="https://www.9320.tech/">Tech9320</a> 
     </p>

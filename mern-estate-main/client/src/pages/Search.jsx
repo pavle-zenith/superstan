@@ -258,10 +258,10 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id='searchTerm'
-              placeholder='min'
+              id=''
+              placeholder=''
               className='border rounded-lg p-3 w-3/12'
-              // value={sidebardata.searchTerm}
+              
               onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
@@ -285,11 +285,11 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id='searchTerm'
-              placeholder='min'
+              id='' 
+              placeholder=''
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
-              onChange={handleChange}
+              // onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
             €

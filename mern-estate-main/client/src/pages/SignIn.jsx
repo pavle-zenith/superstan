@@ -37,7 +37,7 @@ export default function SignIn() {
         return;
       }
       dispatch(signInSuccess(data));
-      navigate('/profil');
+      navigate('/admin');
     } catch (error) {
       dispatch(signInFailure(error.message));
     }
