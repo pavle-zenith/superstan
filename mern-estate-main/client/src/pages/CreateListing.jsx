@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import {
   getDownloadURL,
@@ -28,7 +29,7 @@ export default function CreateListing() {
     furnished: false,
     kvadratura:0,
     heatingType: "Gas",
-    opstina: "ns",
+    opstina: "Voždovac",
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -74,7 +75,7 @@ export default function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`Upload is ${progress}% done`);
+          console.log(`${progress}% Učitano`);
         },
         (error) => {
           reject(error);
@@ -103,16 +104,26 @@ export default function CreateListing() {
       });
     }
 
-    if (
-      e.target.id === 'parking' ||
-      e.target.id === 'furnished' ||
-      e.target.id === 'offer'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.checked,
-      });
-    }
+    // if (
+    //   e.target.id === 'parking' ||
+    //   e.target.id === 'furnished'
+    //   // e.target.id === 'offer'
+    // ) {
+    //     if(e.target.checked == "on"){
+    //     setFormData({
+    //       ...formData,
+    //       [e.target.id]: true,
+    //     });
+        
+    //   }
+    //   if(e.target.checked == "off"){
+    //     setFormData({
+    //       ...formData,
+    //       [e.target.id]: false,
+    //     });
+        
+    //   }
+    // }
 
     console.log(e.target.type)
 
@@ -131,6 +142,7 @@ export default function CreateListing() {
         [e.target.id]: e.target.value,
       });
     }
+    console.log(formData);
   };
 
   const handleSubmit = async (e) => {
@@ -157,7 +169,7 @@ export default function CreateListing() {
       if (data.success === false) {
         setError(data.message);
       }
-      navigate(`/listing/${data._id}`);
+      navigate(`/nekretnina/${data._id}`);
     } catch (error) {
       setError(error.message);
       setLoading(false);

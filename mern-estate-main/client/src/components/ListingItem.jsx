@@ -11,7 +11,7 @@ export default function ListingItem({ listing }) {
               : listing.regularPrice.toLocaleString('en-US')}
             {listing.type === 'Iznajmljivanje' && ' / mesečno'}
           </p>
-      <Link to={`/listing/${listing._id}`}>
+      <Link to={`/nekretnina/${listing._id}`}>
       
         <img
           src={

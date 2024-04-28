@@ -21,13 +21,13 @@ export default function App() {
         <Route path='/kontakt' element={<Kontakt />} />
         <Route path='/sign-up' element={<SignUp />} />
         <Route path='/nekretnine' element={<Search />} />
-        <Route path='/listing/:listingId' element={<Listing />} />
+        <Route path='/nekretnina/:listingId' element={<Listing />} />
 
         <Route element={<PrivateRoute />}>
           <Route path='/admin' element={<Profile />} />
           <Route path='/kreiraj-oglas' element={<CreateListing />} />
           <Route
-            path='/update-listing/:listingId'
+            path='/izmeni-nekretninu/:listingId'
             element={<UpdateListing />}
           />
         </Route>

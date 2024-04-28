@@ -55,10 +55,12 @@ export default function Listing() {
       }
     };
     fetchListing();
+    // 
   }, [params.listingId]);
   function handleCall() {
     window.location.href = 'tel:+38163413113';
   }
+  
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Učitavanje...</p>}
@@ -75,7 +77,9 @@ export default function Listing() {
                 : listing.regularPrice.toLocaleString("en-US")}
               {listing.type === "mesečno" && " / mesečno"} €
             </p>
-            {listing.imageUrls.map((url) => (
+            {
+
+            listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
                   className="h-[550px]"

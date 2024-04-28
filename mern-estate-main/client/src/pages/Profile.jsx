@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useEffect, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Navigate,useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Footer from './Footer.jsx';
 import {
@@ -18,10 +19,13 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   signOutUserStart,
+  signOutUserSuccess,
+  signOutUserFailure,
 } from '../redux/user/userSlice';
 
 export default function Profile() {
   const fileRef = useRef(null);
+  const navigate = useNavigate();
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
   const [filePerc, setFilePerc] = useState(0);
@@ -114,13 +118,19 @@ export default function Profile() {
       dispatch(signOutUserStart());
       const res = await fetch('/api/auth/signout');
       const data = await res.json();
-      if (!data.success) {
-        dispatch(deleteUserFailure(data.message));
+      console.log(res);
+      console.log(data);
+      if (!res.ok) {
+        console.log("ovaj if blokira");
+        dispatch(signOutUserFailure(data.message));
         return;
       }
-      dispatch(deleteUserSuccess(data));
+      dispatch(signOutUserSuccess(data));
+      console.log("izlgovoan");
+      navigate('/prijava', { replace: true });
+      // Navigate('/prijava');
     } catch (error) {
-      dispatch(deleteUserFailure(error.message));
+      dispatch(signOutUserFailure(error.message));
     }
   };
 
@@ -255,7 +265,7 @@ export default function Profile() {
                 key={listing._id}
                 className='border rounded-lg p-3 flex justify-between items-center gap-4'
               >
-                <Link to={`/listing/${listing._id}`}>
+                <Link to={`/nekretnina/${listing._id}`}>
                   <img
                     src={listing.imageUrls[0]}
                     alt='listing cover'
@@ -264,7 +274,7 @@ export default function Profile() {
                 </Link>
                 <Link
                   className='text-slate-700 font-semibold  hover:underline truncate flex-1'
-                  to={`/listing/${listing._id}`}
+                  to={`/nekretnina/${listing._id}`}
                 >
                   <p>{listing.name}</p>
                 </Link>
@@ -276,7 +286,7 @@ export default function Profile() {
                   >
                     Obriši
                   </button>
-                  <Link to={`/update-listing/${listing._id}`}>
+                  <Link to={`/izmeni-nekretninu/${listing._id}`}>
                     <button className='text-green-700 uppercase'>Izmeni</button>
                   </Link>
                 </div>
