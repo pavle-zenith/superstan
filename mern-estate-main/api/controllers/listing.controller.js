@@ -78,6 +78,17 @@ export const getListings = async (req, res, next) => {
       furnished = { $in: [false, true] };
     }
 
+    let opstina = req.query.opstina;
+
+    if (opstina === undefined || opstina === '') {
+      opstina = { $in: ['Voždovac', 'Sopot', 'Banjica', 'Surčin', 'Obrenovac','Lazarevac','Mladenovac','Novi Beograd','Palilula','Čukarica', 'Grocka','Zvezdara','Zemun','Vračar','Stari Grad','Savski Venac','Rakovica'] };
+    }
+    
+    let propertyType = req.query.tipNekretnine;
+
+    if (propertyType === undefined || propertyType === 'all') {
+      propertyType = { $in: ['Stan','Kuća'] };
+    }
 
     // let furnished = req.query.furnished;
 
@@ -110,6 +121,8 @@ export const getListings = async (req, res, next) => {
       furnished,
       parking,
       type,
+      opstina,
+      propertyType,
     })
       .sort({ [sort]: order });
       // .limit(limit)

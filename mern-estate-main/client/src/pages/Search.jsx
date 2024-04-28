@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 import MultiSelectDropdown from '../components/MultiSelectDropdown';
 import Footer from './Footer.jsx';
@@ -11,7 +11,8 @@ export default function Search() {
     type: 'all',
     sprat:'1',
     spratTotal:'1',
-    propertyType:'Stan',
+    propertyType:'all',
+    opstina:'',
     kvadratura:0,
     regularPrice:0,
     parking: false,
@@ -34,6 +35,8 @@ export default function Search() {
     const offerFromUrl = urlParams.get('offer');
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');
+    const opstinaFromUrl = urlParams.get('opstina');
+    const tipNekretnineFromUrl = urlParams.get('tipNekretnine');
 
     if (
       searchTermFromUrl ||
@@ -42,7 +45,9 @@ export default function Search() {
       furnishedFromUrl ||
       offerFromUrl ||
       sortFromUrl ||
-      orderFromUrl
+      orderFromUrl ||
+      opstinaFromUrl || 
+      tipNekretnineFromUrl
     ) {
       setSidebardata({
         searchTerm: searchTermFromUrl || '',
@@ -52,7 +57,13 @@ export default function Search() {
         offer: offerFromUrl === 'true' ? true : false,
         sort: sortFromUrl || 'created_at',
         order: orderFromUrl || 'desc',
+        opstina: opstinaFromUrl || '',
+        tipNekretnine: tipNekretnineFromUrl || '',
       });
+    }
+
+    if (urlParams.get('search')) {
+      console.log('search');
     }
 
     const fetchListings = async () => {
@@ -99,7 +110,9 @@ export default function Search() {
           e.target.checked || e.target.checked === 'true' ? true : false,
       });
     }
-
+    if (e.target.id === 'tipNekretnine') {
+      setSidebardata({ ...sidebardata, tipNekretnine: e.target.value });
+    }
     if (e.target.id === 'sort_order') {
       const sort = e.target.value.split('_')[0] || 'created_at';
 
@@ -107,6 +120,13 @@ export default function Search() {
 
       setSidebardata({ ...sidebardata, sort, order });
     }
+
+    if (e.target.id === 'opstina') {
+      // if(e.target.value === 'Stan' || e.target.value === 'Kuća'){
+    setSidebardata({ ...sidebardata, opstina: e.target.value });
+    // }
+  }
+    // }
   };
 
   const handleSubmit = (e) => {
@@ -119,6 +139,8 @@ export default function Search() {
     urlParams.set('offer', sidebardata.offer);
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
+    urlParams.set('opstina', sidebardata.opstina);
+    urlParams.set('tipNekretnine', sidebardata.tipNekretnine);
     const searchQuery = urlParams.toString();
     navigate(`/nekretnine?${searchQuery}`);
   };
@@ -226,28 +248,32 @@ export default function Search() {
         <span className="whitespace-nowrap font-semibold">Opština: </span>
         <select
           className="border rounded-lg p-3"
-          id="grid-state"
+          id="opstina"
+          onChange={handleChange}
+          defaultValue={''}
+          
         >
-         <option disabled selected value>Izaberite opštinu</option>
+         <option selected value={''}>Sve opštine</option>
 
-          <option>Voždovac</option>
-        <option>Čukarica</option>
-        <option>Novi Beograd</option>
-        <option>Palilula</option>
-        <option>Rakovica</option>
-        <option>Surčin</option>
-        <option>Savski Venac</option>
-        <option>Stari Grad</option>
-        <option>Vračar</option>
-        <option>Zemun</option>
-        <option>Zvezdara</option>
-        <option>Barajevo</option>
-        <option>Grocka</option>
-        <option>Mladenovac</option>
-        <option>Lazarevac</option>
-        <option>Obrenovac</option>
-        <option>Surčin</option>
-        <option>Sopot</option>
+          <option value={'Voždovac'}>Voždovac</option>
+        <option value={'Čukarica'}>Čukarica</option>
+        <option value={'Banjica'}>Banjica</option>
+        <option value={'Novi Beograd'}>Novi Beograd</option>
+        <option value={'Palilula'}>Palilula</option>
+        <option value={'Rakovica'}>Rakovica</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Savski Venac'}>Savski Venac</option>
+        <option value={'Stari Grad'}>Stari Grad</option>
+        <option value={'Vračar'}>Vračar</option>
+        <option value={'Zemun'}>Zemun</option>
+        <option value={'Zvezdara'}>Zvezdara</option>
+        <option value={'Barajevo'}>Barajevo</option>
+        <option value={'Grocka'}>Grocka</option>
+        <option value={'Mladenovac'}>Mladenovac</option>
+        <option value={'Lazarevac'}>Lazarevac</option>
+        <option value={'Obrenovac'}>Obrenovac</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Sopot'}>Sopot</option>
         </select>
       </label>
             
@@ -310,12 +336,13 @@ export default function Search() {
             <label className='font-semibold'>Tip:</label>
             <select
               onChange={handleChange}
-              defaultValue={'created_at_desc'}
-              id='sprat'
+              defaultValue={''}
+              id='tipNekretnine'
               className='border rounded-lg p-3'
             >
-              <option value='regularPrice_desc'>Stan</option>
-              <option value='regularPrice_desc'>Kuća</option>
+              <option selected value={'all'}>Izaberi tip</option>
+              <option value='Stan'>Stan</option>
+              <option value='Kuća'>Kuća</option>
             </select>
           </div>
           <div className='flex items-center gap-2'>

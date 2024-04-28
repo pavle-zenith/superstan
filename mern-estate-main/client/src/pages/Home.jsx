@@ -3,11 +3,14 @@ import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
+import { useNavigate } from 'react-router-dom';
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import Footer from "./Footer.jsx";
 import "../../src/index.css";
 import ListingItem from "../components/ListingItem";
+import { useHistory } from "react-router-dom";
+
 // import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 const features = [
   {
@@ -30,6 +33,35 @@ export default function Home() {
   const [saleListings, setSaleListings] = useState([]);
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
+  const navigate = useNavigate();
+  const history = useHistory();
+  const [sidebardata, setSidebardata] = useState({
+    type: 'Prodaja',
+    propertyType: 'Stan',
+    opstina: 'all',
+  });
+  
+
+  const handleChange = (e) => {
+
+    if (e.target.id === 'tipNekretnine') {
+      setSidebardata({ ...sidebardata, type: e.target.value });
+    }
+
+    if (e.target.id === 'tipNekretnine') {
+      setSidebardata({ ...sidebardata, propertyType: e.target.value });
+    }
+   
+
+    if (e.target.id === 'opstina') {
+      // if(e.target.value === 'Stan' || e.target.value === 'Kuća'){
+    setSidebardata({ ...sidebardata, opstina: e.target.value });
+    // }
+  }
+    // }
+
+  };
+  
   // console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
@@ -94,8 +126,9 @@ export default function Home() {
       <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Usluga</span>
         <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
-          id="grid-state"
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
+          id="type"
+          onChange={handleChange}
         >
           <option>Prodaja</option>
           <option>Iznajmljivanje</option>
@@ -105,8 +138,9 @@ export default function Home() {
       <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Tip</span>
         <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
-          id="grid-state"
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full "
+          id="tipNekretnine"
+          onChange={handleChange}
         >
           <option>Stan</option>
           <option>Kuća</option>
@@ -116,31 +150,44 @@ export default function Home() {
       <label className="flex items-center gap-3 w-full">
         <span className="text-gray-700">Opština</span>
         <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-          id="grid-state"
+          className="border rounded-lg p-3"
+          id="opstina"
+          onChange={handleChange}
+          defaultValue={''}
+          
         >
-          <option>Voždovac</option>
-        <option>Čukarica</option>
-        <option>Novi Beograd</option>
-        <option>Palilula</option>
-        <option>Rakovica</option>
-        <option>Surčin</option>
-        <option>Savski Venac</option>
-        <option>Stari Grad</option>
-        <option>Vračar</option>
-        <option>Zemun</option>
-        <option>Zvezdara</option>
-        <option>Barajevo</option>
-        <option>Grocka</option>
-        <option>Mladenovac</option>
-        <option>Lazarevac</option>
-        <option>Obrenovac</option>
-        <option>Surčin</option>
-        <option>Sopot</option>
+         <option selected value={''}>Sve opštine</option>
+
+          <option value={'Voždovac'}>Voždovac</option>
+          <option value={'Banjica'}>Banjica</option>
+        <option value={'Čukarica'}>Čukarica</option>
+        <option value={'Novi Beograd'}>Novi Beograd</option>
+        <option value={'Palilula'}>Palilula</option>
+        <option value={'Rakovica'}>Rakovica</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Savski Venac'}>Savski Venac</option>
+        <option value={'Stari Grad'}>Stari Grad</option>
+        <option value={'Vračar'}>Vračar</option>
+        <option value={'Zemun'}>Zemun</option>
+        <option value={'Zvezdara'}>Zvezdara</option>
+        <option value={'Barajevo'}>Barajevo</option>
+        <option value={'Grocka'}>Grocka</option>
+        <option value={'Mladenovac'}>Mladenovac</option>
+        <option value={'Lazarevac'}>Lazarevac</option>
+        <option value={'Obrenovac'}>Obrenovac</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Sopot'}>Sopot</option>
         </select>
       </label>
     </div>
-    <button className="bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0">
+    <button
+      className="bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0"
+        onClick={() => {
+          // navigate(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}&search=true`);
+        
+          // history.push(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}&search=true`);
+        }}
+    >
       <FaSearch className="text-white"></FaSearch>
     </button>
   </div>
@@ -149,7 +196,7 @@ export default function Home() {
 
         
         <Link
-          to={"/nekretnine"}
+          to={"/nekretnine2"}
           className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
@@ -161,14 +208,13 @@ export default function Home() {
         {offerListings &&
           offerListings.length > 0 &&
           offerListings.map((listing) => (
-            <SwiperSlide>
+            <SwiperSlide key={listing._id}>
               <div
                 style={{
                   background: `url(${listing.imageUrls[0]}) center no-repeat`,
                   backgroundSize: "cover",
                 }}
                 className="h-[500px]"
-                key={listing._id}
               ></div>
             </SwiperSlide>
           ))}
