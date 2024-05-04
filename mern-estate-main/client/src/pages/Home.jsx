@@ -9,7 +9,7 @@ import "swiper/css/bundle";
 import Footer from "./Footer.jsx";
 import "../../src/index.css";
 import ListingItem from "../components/ListingItem";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 // import { CloudArrowUpIcon, LockClosedIcon, ServerIcon } from '@heroicons/react/20/solid'
 const features = [
@@ -34,17 +34,17 @@ export default function Home() {
   const [rentListings, setRentListings] = useState([]);
   SwiperCore.use([Navigation]);
   const navigate = useNavigate();
-  const history = useHistory();
+  // const history = useHistory();
   const [sidebardata, setSidebardata] = useState({
-    type: 'Prodaja',
-    propertyType: 'Stan',
+    type: 'all',
+    propertyType: 'all',
     opstina: 'all',
   });
   
 
   const handleChange = (e) => {
 
-    if (e.target.id === 'tipNekretnine') {
+    if (e.target.id === 'type') {
       setSidebardata({ ...sidebardata, type: e.target.value });
     }
 
@@ -129,9 +129,9 @@ export default function Home() {
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
           id="type"
           onChange={handleChange}
-        >
-          <option>Prodaja</option>
-          <option>Iznajmljivanje</option>
+        ><option selected value='all'>Sve usluge</option>
+          <option value={'Prodaja'}>Prodaja</option>
+          <option value={'Iznajmljivanje'}>Iznajmljivanje</option>
           {/* Other options */}
         </select>
       </label>
@@ -142,8 +142,9 @@ export default function Home() {
           id="tipNekretnine"
           onChange={handleChange}
         >
-          <option>Stan</option>
-          <option>Kuća</option>
+          <option selected value='all'>Sve</option>
+          <option value='Stan'>Stan</option>
+          <option value='Kuća'>Kuća</option>
           {/* Other options */}
         </select>
       </label>
@@ -156,10 +157,10 @@ export default function Home() {
           defaultValue={''}
           
         >
-         <option selected value={''}>Sve opštine</option>
+         <option selected value='all'>Sve opštine</option>
 
-          <option value={'Voždovac'}>Voždovac</option>
-          <option value={'Banjica'}>Banjica</option>
+        <option value={'Voždovac'}>Voždovac</option>
+        <option value={'Banjica'}>Banjica</option>
         <option value={'Čukarica'}>Čukarica</option>
         <option value={'Novi Beograd'}>Novi Beograd</option>
         <option value={'Palilula'}>Palilula</option>
@@ -183,7 +184,7 @@ export default function Home() {
     <button
       className="bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0"
         onClick={() => {
-          // navigate(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}&search=true`);
+          navigate(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}`);
         
           // history.push(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}&search=true`);
         }}
@@ -196,7 +197,7 @@ export default function Home() {
 
         
         <Link
-          to={"/nekretnine2"}
+          to={"/nekretnine"}
           className="button-container mx-auto flex-none  bg-superstan hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
         >
           <p className=" inline-block">Pogledajte sve nekretnine</p>
@@ -315,7 +316,7 @@ export default function Home() {
                 </dl>
               </div>
               <Link
-                to={"/search"}
+                to={"/kontakt"}
                 style={{
                   width: "100%",
                   textAlign:"center"

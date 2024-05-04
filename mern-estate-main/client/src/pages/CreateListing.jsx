@@ -19,11 +19,14 @@ export default function CreateListing() {
     name: '',
     description: '',
     address: '',
-    type: 'rent',
+    type: 'Iznajmljivanje',
+    tipNekretnine: 'Stan',
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
     discountPrice: 0,
+    sprat:0,
+    spratTotal:0,
     offer: false,
     parking: false,
     furnished: false,
@@ -36,6 +39,8 @@ export default function CreateListing() {
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(formData);
+
+
   const handleImageSubmit = (e) => {
     if (files.length > 0 && files.length + formData.imageUrls.length < 16) {
       setUploading(true);
@@ -100,31 +105,11 @@ export default function CreateListing() {
     if (e.target.id === 'sale' || e.target.id === 'rent') {
       setFormData({
         ...formData,
-        type: e.target.id,
+        type: e.target.value,
       });
     }
 
-    // if (
-    //   e.target.id === 'parking' ||
-    //   e.target.id === 'furnished'
-    //   // e.target.id === 'offer'
-    // ) {
-    //     if(e.target.checked == "on"){
-    //     setFormData({
-    //       ...formData,
-    //       [e.target.id]: true,
-    //     });
-        
-    //   }
-    //   if(e.target.checked == "off"){
-    //     setFormData({
-    //       ...formData,
-    //       [e.target.id]: false,
-    //     });
-        
-    //   }
-    // }
-
+  
     console.log(e.target.type)
 
     if (
@@ -188,7 +173,7 @@ export default function CreateListing() {
             className='border p-3 rounded-lg'
             id='name'
             maxLength='62'
-            minLength='10'
+            minLength='5'
             required
             onChange={handleChange}
             value={formData.name}
@@ -218,24 +203,35 @@ export default function CreateListing() {
             onChange={handleChange}
             value={formData.opstina}
           >
-            <option>Voždovac</option>
-            <option>Čukarica</option>
-            <option>Novi Beograd</option>
-            <option>Palilula</option>
-            <option>Rakovica</option>
-            <option>Surčin</option>
-            <option>Savski Venac</option>
-            <option>Stari Grad</option>
-            <option>Vračar</option>
-            <option>Zemun</option>
-            <option>Zvezdara</option>
-            <option>Barajevo</option>
-            <option>Grocka</option>
-            <option>Mladenovac</option>
-            <option>Lazarevac</option>
-            <option>Obrenovac</option>
-            <option>Surčin</option>
-            <option>Sopot</option>
+            <option value={'Voždovac'}>Voždovac</option>
+            <option value={'Banjica'}>Banjica</option>
+            <option value={'Čukarica'}>Čukarica</option>
+            <option value={'Novi Beograd'}>Novi Beograd</option>
+            <option value={'Palilula'}>Palilula</option>
+            <option value={'Rakovica'}>Rakovica</option>
+            <option value={'Surčin'}>Surčin</option>
+            <option value={'Savski Venac'}>Savski Venac</option>
+            <option value={'Stari Grad'}>Stari Grad</option>
+            <option value={'Vračar'}>Vračar</option>
+            <option value={'Zemun'}>Zemun</option>
+            <option value={'Zvezdara'}>Zvezdara</option>
+            <option value={'Barajevo'}>Barajevo</option>
+            <option value={'Grocka'}>Grocka</option>
+            <option value={'Mladenovac'}>Mladenovac</option>
+            <option value={'Lazarevac'}>Lazarevac</option>
+            <option value={'Obrenovac'}>Obrenovac</option>
+            <option value={'Surčin'}>Surčin</option>
+            <option value={'Sopot'}>Sopot</option>
+          </select>
+          <select 
+            className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            type="text"
+            id="type"
+            onChange={handleChange}
+            value={formData.opstina}
+          >
+            <option value={'Stan'}>Stan</option>
+            <option value={'Kuća'}>Kuća</option>
           </select>
           <div className='flex gap-6 flex-wrap'>
             <div className='flex gap-2'>

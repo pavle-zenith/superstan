@@ -253,7 +253,7 @@ export default function Search() {
           defaultValue={''}
           
         >
-         <option selected value={''}>Sve opštine</option>
+         <option selected value='all'>Sve opštine</option>
 
           <option value={'Voždovac'}>Voždovac</option>
         <option value={'Čukarica'}>Čukarica</option>
@@ -311,7 +311,7 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id='' 
+              id='min_kvadratura' 
               placeholder=''
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
@@ -340,7 +340,7 @@ export default function Search() {
               id='tipNekretnine'
               className='border rounded-lg p-3'
             >
-              <option selected value={'all'}>Izaberi tip</option>
+              <option selected value='all'>Izaberi tip</option>
               <option value='Stan'>Stan</option>
               <option value='Kuća'>Kuća</option>
             </select>

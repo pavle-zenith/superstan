@@ -20,6 +20,7 @@ import {
   FaDoorOpen,
   FaBuilding,
   FaBook,
+  FaPhoneAlt,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
 
@@ -115,8 +116,8 @@ export default function Listing() {
   </p>
   <button
     onClick={() => handleCall()}
-    className="bg-superstan text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
-    Kontakt Telefon
+    className="bg-superstan flex items-center font-semibold gap-2 text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
+    <FaPhoneAlt></FaPhoneAlt> 063 413 113
   </button>
 </div>
 

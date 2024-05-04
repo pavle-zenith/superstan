@@ -80,7 +80,7 @@ export const getListings = async (req, res, next) => {
 
     let opstina = req.query.opstina;
 
-    if (opstina === undefined || opstina === '') {
+    if (opstina === undefined || opstina === 'all') {
       opstina = { $in: ['Voždovac', 'Sopot', 'Banjica', 'Surčin', 'Obrenovac','Lazarevac','Mladenovac','Novi Beograd','Palilula','Čukarica', 'Grocka','Zvezdara','Zemun','Vračar','Stari Grad','Savski Venac','Rakovica'] };
     }
     
