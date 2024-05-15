@@ -46,6 +46,10 @@ const listingSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    bedrooms: {
+      type: Number,
+      required: false,
+    },
     furnished: {
       type: Boolean,
       required: false,
@@ -59,6 +63,10 @@ const listingSchema = new mongoose.Schema(
       required: false,
     },
     propertyType: {
+      type: String,
+      required: false,
+    },
+    struktura: {
       type: String,
       required: false,
     },

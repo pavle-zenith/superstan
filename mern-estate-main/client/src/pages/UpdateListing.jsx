@@ -19,14 +19,21 @@ export default function CreateListing() {
     name: '',
     description: '',
     address: '',
-    type: 'rent',
+    type: 'Iznajmljivanje',
+    propertyType: 'Stan',
+    struktura: "",
     bedrooms: 1,
     bathrooms: 1,
     regularPrice: 50,
     discountPrice: 0,
+    sprat:1,
+    spratTotal:1,
     offer: false,
     parking: false,
     furnished: false,
+    kvadratura:0,
+    heatingType: "Gas",
+    opstina: "Voždovac",
   });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -108,35 +115,52 @@ export default function CreateListing() {
     });
   };
 
+  // const handleChange = (e) => {
+  //   if (e.target.id === 'sale' || e.target.id === 'rent') {
+  //     setFormData({
+  //       ...formData,
+  //       type: e.target.id,
+  //     });
+  //   }
+
+  //   if (
+  //     e.target.id === 'parking' ||
+  //     e.target.id === 'furnished' ||
+  //     e.target.id === 'offer'
+  //   ) {
+  //     setFormData({
+  //       ...formData,
+  //       [e.target.id]: e.target.checked,
+  //     });
+  //   }
+
+  //   if (
+  //     e.target.type === 'number' ||
+  //     e.target.type === 'text' ||
+  //     e.target.type === 'textarea'
+  //   ) {
+  //     setFormData({
+  //       ...formData,
+  //       [e.target.id]: e.target.value,
+  //     });
+  //   }
+  // };
+
   const handleChange = (e) => {
-    if (e.target.id === 'sale' || e.target.id === 'rent') {
-      setFormData({
-        ...formData,
-        type: e.target.id,
-      });
-    }
-
-    if (
-      e.target.id === 'parking' ||
-      e.target.id === 'furnished' ||
-      e.target.id === 'offer'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.checked,
-      });
-    }
-
-    if (
-      e.target.type === 'number' ||
-      e.target.type === 'text' ||
-      e.target.type === 'textarea'
-    ) {
-      setFormData({
-        ...formData,
-        [e.target.id]: e.target.value,
-      });
-    }
+    const { id, value, type, checked } = e.target;
+    const newValue = type === 'checkbox' ? checked : value;
+  
+    setFormData((prevFormData) => {
+      const newFormData = {
+        ...prevFormData,
+        [id]: newValue,
+      };
+  
+      // Log the new state value after the state update
+      console.log(id, newFormData[id]);
+  
+      return newFormData;
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -176,13 +200,13 @@ export default function CreateListing() {
       </h1>
       <form onSubmit={handleSubmit} className='flex flex-col sm:flex-row gap-4'>
         <div className='flex flex-col gap-4 flex-1'>
-          <input
+        <input
             type='text'
             placeholder='Naziv'
             className='border p-3 rounded-lg'
             id='name'
             maxLength='62'
-            minLength='10'
+            minLength='5'
             required
             onChange={handleChange}
             value={formData.name}
@@ -191,7 +215,7 @@ export default function CreateListing() {
             type='text'
             placeholder='Opis'
             className='border p-3 rounded-lg'
-            id='Opis'
+            id='description'
             required
             onChange={handleChange}
             value={formData.description}
@@ -200,32 +224,68 @@ export default function CreateListing() {
             type='text'
             placeholder='Adresa'
             className='border p-3 rounded-lg'
-            id='Adresa'
+            id='address'
             required
             onChange={handleChange}
             value={formData.address}
           />
+          <input
+            type='text'
+            placeholder='Struktura'
+            className='border p-3 rounded-lg'
+            id='struktura'
+            required
+            onChange={handleChange}
+            value={formData.struktura}
+          />
+          <select 
+            className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            type="text"
+            id="opstina"
+            onChange={handleChange}
+            value={formData.opstina}
+          >
+            <option value={'Voždovac'}>Voždovac</option>
+            <option value={'Banjica'}>Banjica</option>
+            <option value={'Čukarica'}>Čukarica</option>
+            <option value={'Novi Beograd'}>Novi Beograd</option>
+            <option value={'Palilula'}>Palilula</option>
+            <option value={'Rakovica'}>Rakovica</option>
+            <option value={'Surčin'}>Surčin</option>
+            <option value={'Savski Venac'}>Savski Venac</option>
+            <option value={'Stari Grad'}>Stari Grad</option>
+            <option value={'Vračar'}>Vračar</option>
+            <option value={'Zemun'}>Zemun</option>
+            <option value={'Zvezdara'}>Zvezdara</option>
+            <option value={'Barajevo'}>Barajevo</option>
+            <option value={'Grocka'}>Grocka</option>
+            <option value={'Mladenovac'}>Mladenovac</option>
+            <option value={'Lazarevac'}>Lazarevac</option>
+            <option value={'Obrenovac'}>Obrenovac</option>
+            <option value={'Surčin'}>Surčin</option>
+            <option value={'Sopot'}>Sopot</option>
+          </select>
+          <select 
+            className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+            type="text"
+            id="propertyType"
+            onChange={handleChange}
+            value={formData.propertyType}
+          >
+            <option value='Stan'>Stan</option>
+            <option value='Kuća'>Kuća</option>
+          </select>
+          <select
+  className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+  id="type"
+  onChange={handleChange}
+  value={formData.type}
+>
+  <option value='Prodaja'>Prodaja</option>
+  <option value='Iznajmljivanje'>Iznajmljivanje</option>
+</select>
           <div className='flex gap-6 flex-wrap'>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='Prodaja'
-                className='w-5'
-                onChange={handleChange}
-                checked={formData.type === 'Prodaja'}
-              />
-              <span>Prodaja</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='Iznajmljivanje'
-                className='w-5'
-                onChange={handleChange}
-                checked={formData.type === 'Iznajmljivanje'}
-              />
-              <span>Iznajmljivanje</span>
-            </div>
+          
             <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -239,23 +299,14 @@ export default function CreateListing() {
             <div className='flex gap-2'>
               <input
                 type='checkbox'
-                id='opremljen'
+                id='furnished'
                 className='w-5'
                 onChange={handleChange}
                 checked={formData.furnished}
               />
               <span>Opremljen</span>
             </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='offer'
-                className='w-5'
-                onChange={handleChange}
-                checked={formData.offer}
-              />
-              <span>Offer</span>
-            </div>
+            
           </div>
           <div className='flex flex-wrap gap-6'>
             <div className='flex items-center gap-2'>
@@ -282,7 +333,20 @@ export default function CreateListing() {
                 onChange={handleChange}
                 value={formData.bathrooms}
               />
-              <p>Baths</p>
+              <p>Broj Soba</p>
+            </div>
+            <div className='flex items-center gap-2'>
+              <input
+                type='number'
+                id='kvadratura'
+                min='1'
+                max='10000'
+                required
+                className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.kvadratura}
+              />
+              <p>Kvadratura</p>
             </div>
             <div className='flex items-center gap-2'>
               <input
@@ -296,10 +360,22 @@ export default function CreateListing() {
                 value={formData.regularPrice}
               />
               <div className='flex flex-col items-center'>
-                <p>Regular price</p>
+                <p>Cena (eur)</p>
                 {formData.type === 'rent' && (
-                  <span className='text-xs'>($ / month)</span>
+                  <span className='text-xs'>(eur / mesečno)</span>
                 )}
+              </div>
+            </div>
+            <div className='flex items-center gap-2'>
+               <input
+                type='text'
+                id='heatingType'
+                className='p-3 border border-gray-300 rounded-lg'
+                onChange={handleChange}
+                value={formData.heatingType}
+              />
+              <div className='flex flex-col items-center'>
+                <p>Vrsta grejanja</p>
               </div>
             </div>
             {formData.offer && (
@@ -315,9 +391,10 @@ export default function CreateListing() {
                   value={formData.discountPrice}
                 />
                 <div className='flex flex-col items-center'>
-                  <p>Discounted price</p>
-                  {formData.type === 'Iznajmljivanje' && (
-                    <span className='text-xs'>(€ / mesečno)</span>
+                  <p>Snižena cena</p>
+
+                  {formData.type === 'rent' && (
+                    <span className='text-xs'>(eur / mesečno)</span>
                   )}
                 </div>
               </div>

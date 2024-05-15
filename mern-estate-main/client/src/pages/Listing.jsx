@@ -21,6 +21,7 @@ import {
   FaBuilding,
   FaBook,
   FaPhoneAlt,
+  FaToilet,
 } from "react-icons/fa";
 import Contact from "../components/Contact";
 
@@ -73,10 +74,12 @@ export default function Listing() {
           <Swiper navigation className="slajder max-w-6xl rounded-md mt-10">
           <p className="cenaDetail text-2xl font-semibold">
               
-              {listing.offer
-                ? listing.discountPrice.toLocaleString("en-US")
-                : listing.regularPrice.toLocaleString("en-US")}
-              {listing.type === "mesečno" && " / mesečno"} €
+          €
+            {listing.offer
+              ? listing.discountPrice.toLocaleString('en-US')
+              : listing.regularPrice.toLocaleString('en-US')}
+            {listing.type === 'Iznajmljivanje' && ' / mesečno'}
+              
             </p>
             {
 
@@ -127,7 +130,7 @@ export default function Listing() {
             </p>
             <div className="flex gap-4">
               <p className="bg-superstan w-full max-w-[200px] text-white text-center p-1 rounded-md">
-                {listing.type === "rent" ? "Iznajmljivanje" : "Prodaja"}
+                {listing.type}
               </p>
               {listing.offer && (
                 <p className="bg-superstan w-full max-w-[200px] text-white text-center p-1 rounded-md">
@@ -276,6 +279,36 @@ export default function Listing() {
             </h2>
             <p className="leading-relaxed text-base">
             {listing.parking ? "Parking Mesto" : "Nema Parking"}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="p-4 md:w-1/3 w-full">
+        <div className="bg-white rounded-lg flex items-center p-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+          <FaToilet  className="text-lg"/>
+          </div>
+          <div className="flex-grow">
+            <h2 className="text-black font-medium text-lg title-font">
+              Kupatila:
+            </h2>
+            <p className="leading-relaxed text-base">
+            {listing.bedrooms}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="p-4 md:w-1/3 w-full">
+        <div className="bg-white rounded-lg flex items-center p-4">
+          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+          <FaToilet  className="text-lg"/>
+          </div>
+          <div className="flex-grow">
+            <h2 className="text-black font-medium text-lg title-font">
+              Struktura:
+            </h2>
+            <p className="leading-relaxed text-base">
+            {listing.struktura}
             </p>
           </div>
         </div>
