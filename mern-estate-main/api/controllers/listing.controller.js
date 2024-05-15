@@ -64,7 +64,6 @@ export const getListing = async (req, res, next) => {
 
 export const getListings = async (req, res, next) => {
   try {
-    // const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     let offer = req.query.offer;
 
@@ -90,13 +89,6 @@ export const getListings = async (req, res, next) => {
       propertyType = { $in: ['Stan','Kuća'] };
     }
 
-    // let furnished = req.query.furnished;
-
-    // if (furnished === undefined || furnished === 'false') {
-    //   furnished = { $in: [false, true] };
-    // }
-
-    
     let parking = req.query.parking;
 
     if (parking === undefined || parking === 'false') {
@@ -110,10 +102,17 @@ export const getListings = async (req, res, next) => {
     }
 
     const searchTerm = req.query.searchTerm || '';
-
     const sort = req.query.sort || 'createdAt';
-
     const order = req.query.order || 'desc';
+
+    let sortOptions = { [sort]: order === 'desc' ? -1 : 1 };
+
+    // Handling custom sorting based on 'kvadratura'
+    if (sort === 'kvadratura_asc') {
+      sortOptions = { kvadratura: 1 };
+    } else if (sort === 'kvadratura_desc') {
+      sortOptions = { kvadratura: -1 };
+    }
 
     const listings = await Listing.find({
       name: { $regex: searchTerm, $options: 'i' },
@@ -124,12 +123,11 @@ export const getListings = async (req, res, next) => {
       opstina,
       propertyType,
     })
-      .sort({ [sort]: order });
-      // .limit(limit)
-      
+    .sort(sortOptions);
 
     return res.status(200).json(listings);
   } catch (error) {
     next(error);
   }
 };
+

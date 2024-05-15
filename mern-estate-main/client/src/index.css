@@ -54,7 +54,7 @@ a {
   border-radius: 0.5rem;
   right: 0;
   margin: 10px;
-  z-index: 999;
+  z-index: 30;
 }
 .widthFix {
   width: 100% !important;
@@ -119,6 +119,8 @@ img {
   object-fit: cover !important;
 
 }
+
+
 @media screen and (max-width: 800px) {
   .btn2 {
     display: block;
@@ -131,5 +133,8 @@ img {
   }
   .listingIMGfix {
     object-fit: contain !important;
+  }
+  .rezultati {
+    text-align: center;
   }
 }

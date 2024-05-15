@@ -12,7 +12,7 @@ export default function Search() {
     sprat:'1',
     spratTotal:'1',
     propertyType:'all',
-    opstina:'',
+    opstina:'all',
     kvadratura:0,
     regularPrice:0,
     parking: false,
@@ -158,10 +158,19 @@ export default function Search() {
     }
     setListings([...listings, ...data]);
   };
+  const [isFormVisible, setIsFormVisible] = useState(false);
+
+  const toggleFormVisibility = () => setIsFormVisible(!isFormVisible);
   return (
     <div>
     <div className='flex flex-col lg:flex-row'>
-  <div className='p-7 sticky top-15 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4'>
+    <button
+                className="sm:hidden bg-superstan hover:bg-red-500 text-white font-bold py-2 px-4 mx-7 mt-9 rounded"
+                onClick={toggleFormVisibility}
+            >
+                Detaljna Pretraga
+            </button>
+    <div className={`${isFormVisible ? 'block' : 'hidden'} p-7 sticky top-15 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4 sm:block`}>
     <form onSubmit={handleSubmit} className='sticky top-8 flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
@@ -247,7 +256,7 @@ export default function Search() {
           <label className="flex flex-col md:flex-row pr-4 items-center gap-5 w-full">
         <span className="whitespace-nowrap font-semibold">Opština: </span>
         <select
-          className="border rounded-lg p-3"
+          className="rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
           id="opstina"
           onChange={handleChange}
           defaultValue={''}
@@ -285,7 +294,7 @@ export default function Search() {
             <input
               type='number'
               id=''
-              placeholder=''
+              placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               
               onChange={handleChange}
@@ -312,7 +321,7 @@ export default function Search() {
             <input
               type='number'
               id='min_kvadratura' 
-              placeholder=''
+              placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
               // onChange={handleChange}
@@ -338,7 +347,7 @@ export default function Search() {
               onChange={handleChange}
               defaultValue={''}
               id='tipNekretnine'
-              className='border rounded-lg p-3'
+              className='rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full'
             >
               <option selected value='all'>Izaberi tip</option>
               <option value='Stan'>Stan</option>
@@ -351,12 +360,14 @@ export default function Search() {
               onChange={handleChange}
               defaultValue={'created_at_desc'}
               id='sort_order'
-              className='border rounded-lg p-3'
+              className='rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full'
             >
               <option value='regularPrice_desc'>Cena viša ka nižoj</option>
               <option value='regularPrice_asc'>Cena niža ka višoj</option>
               <option value='createdAt_desc'>Najnoviji</option>
               <option value='createdAt_asc'>Najstariji</option>
+              <option value='kvadratura_asc'>Kvadratura niža ka višoj</option>
+              <option value='kvadratura_desc'>Kvadratura viša ka nižoj</option>
             </select>
           </div>
           <button className='bg-superstan text-white p-3 rounded-lg hover:opacity-95'>
@@ -365,7 +376,7 @@ export default function Search() {
           </form>
           </div>
   <div className='flex-1 lg:w-3/4'>
-    <h1 className='text-3xl font-semibold border-b p-3 text-slate-700 mt-5 lg:mt-0'>
+    <h1 className='text-3xl rezultati font-semibold border-b p-3 text-slate-700 mt-5 lg:mt-0'>
       Rezultati pretrage:
     </h1>
     <div className='p-7 grid karte grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-2 gap-4'>

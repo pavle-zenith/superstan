@@ -57,6 +57,7 @@ export default function Home() {
       // if(e.target.value === 'Stan' || e.target.value === 'Kuća'){
     setSidebardata({ ...sidebardata, opstina: e.target.value });
     // }
+    console.log(sidebardata);
   }
     // }
 
@@ -139,7 +140,7 @@ export default function Home() {
          <span className="text-gray-700">Tip</span>
          <select
           className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
-          id="opstina"
+          id="tipNekretnine"
           onChange={handleChange}
         >
           <option selected value='all'>Svi Tipovi</option>
