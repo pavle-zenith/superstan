@@ -56,10 +56,11 @@ a {
   margin: 10px;
   z-index: 999;
 }
+.widthFix {
+  width: 100% !important;
 
-.listingContainer {
-  padding-left: 0 !important;
 }
+
 img {
   width: 200px;
 }
@@ -90,10 +91,45 @@ img {
 .footerSpacingFix {
   padding-bottom: 3rem !important;
 }
-@media (min-width: 1500px) {
 
+@media (min-width: 1200px) {
+  .listingContainer {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+@media (min-width: 1500px) {
+  
   .karte {
     grid-template-columns: repeat(3, minmax(0, 0.25fr)) !important;
   }
   
+}
+@media (min-width: 2000px) {
+
+  .karte {
+    grid-template-columns: repeat(5, minmax(0, 0.25fr)) !important;
+  }
+  
+}
+.btn2 {
+  display:none;
+}
+.listingIMGfix {
+  object-fit: cover !important;
+
+}
+@media screen and (max-width: 800px) {
+  .btn2 {
+    display: block;
+  }
+  .btn {
+    display: none;
+  }
+  .slajder {
+    margin-top: 0 !important;
+  }
+  .listingIMGfix {
+    object-fit: contain !important;
+  }
 }

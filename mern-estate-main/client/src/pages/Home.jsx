@@ -121,12 +121,12 @@ export default function Home() {
           Superstan - Vaš pouzdani partner za nekretnine
         </div>
         <div className="flex items-center justify-center p-4">
-  <div className="bg-white max-w-s md:max-w-3xl p-2 flex flex-col md:flex-row justify-between items-center rounded w-full">
-    <div className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-5 w-full">
-      <label className="flex items-center gap-3 w-full">
-        <span className="text-gray-700">Usluga</span>
-        <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 "
+        <div className="bg-white max-w-xs sm:max-w-3xl p-2 flex flex-col md:flex-row justify-between items-center rounded w-full">
+        <div className="flex flex-col md:flex-row pl-4 pr-4 items-center gap-2 md:gap-5 w-full">
+        <label className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full">      
+          <span className="text-gray-700">Usluga</span>
+          <select
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
           id="type"
           onChange={handleChange}
         ><option selected value='all'>Sve usluge</option>
@@ -135,23 +135,23 @@ export default function Home() {
           {/* Other options */}
         </select>
       </label>
-      <label className="flex items-center gap-3 w-full">
-        <span className="text-gray-700">Tip</span>
-        <select
-          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full "
-          id="tipNekretnine"
+      <label className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full">     
+         <span className="text-gray-700">Tip</span>
+         <select
+          className="bg-white border border-gray-300 text-gray-700 py-2 px-4 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          id="opstina"
           onChange={handleChange}
         >
-          <option selected value='all'>Sve</option>
+          <option selected value='all'>Svi Tipovi</option>
           <option value='Stan'>Stan</option>
           <option value='Kuća'>Kuća</option>
           {/* Other options */}
         </select>
       </label>
-      <label className="flex items-center gap-3 w-full">
-        <span className="text-gray-700">Opština</span>
+      <label className="flex flex-col md:flex-row items-center gap-2 md:gap-3 w-full">     
+         <span className="text-gray-700">Opština</span>
         <select
-          className="border rounded-lg p-3"
+          className="rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
           id="opstina"
           onChange={handleChange}
           defaultValue={''}
@@ -181,8 +181,27 @@ export default function Home() {
         </select>
       </label>
     </div>
+    {/* <option value={'Voždovac'}>Voždovac</option>
+        <option value={'Banjica'}>Banjica</option>
+        <option value={'Čukarica'}>Čukarica</option>
+        <option value={'Novi Beograd'}>Novi Beograd</option>
+        <option value={'Palilula'}>Palilula</option>
+        <option value={'Rakovica'}>Rakovica</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Savski Venac'}>Savski Venac</option>
+        <option value={'Stari Grad'}>Stari Grad</option>
+        <option value={'Vračar'}>Vračar</option>
+        <option value={'Zemun'}>Zemun</option>
+        <option value={'Zvezdara'}>Zvezdara</option>
+        <option value={'Barajevo'}>Barajevo</option>
+        <option value={'Grocka'}>Grocka</option>
+        <option value={'Mladenovac'}>Mladenovac</option>
+        <option value={'Lazarevac'}>Lazarevac</option>
+        <option value={'Obrenovac'}>Obrenovac</option>
+        <option value={'Surčin'}>Surčin</option>
+        <option value={'Sopot'}>Sopot</option> */}
     <button
-      className="bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto my-2 md:my-0"
+            className="btn bg-superstan p-3 focus:outline-none rounded shadow w-full md:w-auto mt-4 md:mt-0"
         onClick={() => {
           navigate(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}`);
         
@@ -190,6 +209,16 @@ export default function Home() {
         }}
     >
       <FaSearch className="text-white"></FaSearch>
+    </button>
+    <button
+            className="btn2 font-bold bg-superstan p-3 text-white focus:outline-none rounded shadow w-full md:w-auto mt-4 md:mt-0"
+        onClick={() => {
+          navigate(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}`);
+        
+          // history.push(`/nekretnine?type=${sidebardata.type}&tipNekretnine=${sidebardata.propertyType}&opstina=${sidebardata.opstina}&search=true`);
+        }}
+    >
+      Pretraga
     </button>
   </div>
 </div>
@@ -239,7 +268,7 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap gap-4">
               {offerListings.slice(0, 3).map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem className="widthFix" listing={listing} key={listing._id} />
               ))}
             </div>
           </div>
@@ -259,7 +288,7 @@ export default function Home() {
             </div>
             <div className="flex flex-wrap gap-4">
               {rentListings.slice(0, 3).map((listing) => (
-                <ListingItem listing={listing} key={listing._id} />
+                <ListingItem className="widthFix" listing={listing} key={listing._id} />
               ))}
             </div>
           </div>

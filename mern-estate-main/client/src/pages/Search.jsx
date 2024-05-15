@@ -161,8 +161,8 @@ export default function Search() {
   return (
     <div>
     <div className='flex flex-col lg:flex-row'>
-  <div className='p-7 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4'>
-    <form onSubmit={handleSubmit} className='flex flex-col gap-8'>
+  <div className='p-7 sticky top-15 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4'>
+    <form onSubmit={handleSubmit} className='sticky top-8 flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>
               Termin pretrage:

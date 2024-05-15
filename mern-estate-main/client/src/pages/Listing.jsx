@@ -86,7 +86,7 @@ export default function Listing() {
                   className="h-[550px]"
                   style={{
                     background: `url(${url}) center no-repeat`,
-                    backgroundSize: "cover",
+                    backgroundSize: window.innerWidth < 640 ? 'contain' : 'cover'
                   }}
                 ></div>
               </SwiperSlide>
@@ -116,7 +116,7 @@ export default function Listing() {
   </p>
   <button
     onClick={() => handleCall()}
-    className="bg-superstan flex items-center font-semibold gap-2 text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
+    className="callme bg-superstan flex justify-center items-center text-center font-semibold gap-2 text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
     <FaPhoneAlt></FaPhoneAlt> 063 413 113
   </button>
 </div>
