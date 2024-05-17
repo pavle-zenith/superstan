@@ -10,7 +10,7 @@ import UpdateListing from './pages/UpdateListing';
 import Listing from './pages/Listing';
 import Search from './pages/Search';
 import Kontakt from './pages/Kontakt';
-
+// import 'leaflet/dist/leaflet.css';
 export default function App() {
   return (
     <BrowserRouter>

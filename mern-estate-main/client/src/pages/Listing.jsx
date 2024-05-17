@@ -4,7 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import Footer from "./Footer";
 import "swiper/css/bundle";
@@ -27,8 +27,6 @@ import {
 } from "react-icons/fa";
 import Contact from "../components/Contact";
 
-// https://sabe.io/blog/javascript-format-numbers-commas#:~:text=The%20best%20way%20to%20format,format%20the%20number%20with%20commas.
-
 export default function Listing() {
   SwiperCore.use([Navigation]);
   const [listing, setListing] = useState(null);
@@ -36,6 +34,7 @@ export default function Listing() {
   const [error, setError] = useState(false);
   const [copied, setCopied] = useState(false);
   const [contact, setContact] = useState(false);
+  const [mapCenter, setMapCenter] = useState([44.8125, 20.4612]); // Default center for Belgrade
   const params = useParams();
   const { currentUser } = useSelector((state) => state.user);
 
@@ -53,18 +52,31 @@ export default function Listing() {
         setListing(data);
         setLoading(false);
         setError(false);
+
+        // Fetch coordinates for the listing address
+        const coordinates = await getCoordinates(data.address);
+        setMapCenter([coordinates.lat, coordinates.lon]);
       } catch (error) {
         setError(true);
         setLoading(false);
       }
     };
     fetchListing();
-    // 
   }, [params.listingId]);
+
   function handleCall() {
     window.location.href = 'tel:+38163413113';
   }
-  const position = [51.505, -0.09];
+
+  const MapInvalidate = () => {
+    const map = useMap();
+    useEffect(() => {
+      map.invalidateSize();
+      map.setView(mapCenter);
+    }, [map, mapCenter]);
+    return null;
+  };
+
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Učitavanje...</p>}
@@ -74,18 +86,14 @@ export default function Listing() {
       {listing && !loading && !error && (
         <div>
           <Swiper navigation className="slajder max-w-6xl rounded-md mt-10">
-          <p className="cenaDetail text-2xl font-semibold">
-              
-          €
-            {listing.offer
-              ? listing.discountPrice.toLocaleString('en-US')
-              : listing.regularPrice.toLocaleString('en-US')}
-            {listing.type === 'Iznajmljivanje' && ' / mesečno'}
-              
+            <p className="cenaDetail text-2xl font-semibold">
+              €
+              {listing.offer
+                ? listing.discountPrice.toLocaleString('en-US')
+                : listing.regularPrice.toLocaleString('en-US')}
+              {listing.type === 'Iznajmljivanje' && ' / mesečno'}
             </p>
-            {
-
-            listing.imageUrls.map((url) => (
+            {listing.imageUrls.map((url) => (
               <SwiperSlide key={url}>
                 <div
                   className="h-[550px]"
@@ -97,34 +105,17 @@ export default function Listing() {
               </SwiperSlide>
             ))}
           </Swiper>
-          {/* <div className="fixed top-[13%] right-[3%] z-10 border rounded-full w-12 h-12 flex justify-center items-center bg-slate-100 cursor-pointer">
-            <FaShare
-              className="text-slate-500"
-              onClick={() => {
-                navigator.clipboard.writeText(window.location.href);
-                setCopied(true);
-                setTimeout(() => {
-                  setCopied(false);
-                }, 2000);
-              }}
-            />
-          </div>
-          {copied && (
-            <p className="fixed top-[23%] right-[5%] z-10 rounded-md bg-slate-100 p-2">
-              Link copied!
-            </p>
-          )} */}
           <div className="flex flex-col max-w-6xl mx-auto p-3 my-5 gap-4">
-          <div className="flex flex-col sm:flex-row justify-between items-center">
-  <p className="text-2xl font-semibold self-start mb-4 sm:mb-0">
-    {listing.name}
-  </p>
-  <button
-    onClick={() => handleCall()}
-    className="callme bg-superstan flex justify-center items-center text-center font-semibold gap-2 text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
-    <FaPhoneAlt></FaPhoneAlt> 063 413 113
-  </button>
-</div>
+            <div className="flex flex-col sm:flex-row justify-between items-center">
+              <p className="text-2xl font-semibold self-start mb-4 sm:mb-0">
+                {listing.name}
+              </p>
+              <button
+                onClick={() => handleCall()}
+                className="callme bg-superstan flex justify-center items-center text-center font-semibold gap-2 text-white rounded-lg hover:opacity-95 p-3 w-full sm:w-auto sm:px-20">
+                <FaPhoneAlt></FaPhoneAlt> 063 413 113
+              </button>
+            </div>
 
             <p className="flex items-center mt-1 gap-2 text-slate-900 font-semibold text-lg">
               <FaMapMarkerAlt className="text-superstan" />
@@ -149,228 +140,206 @@ export default function Listing() {
             </p>
             
             <section className="text-gray-400 body-font">
-  <div className="container mx-auto mt-5 mb-2">
-    <div className="flex flex-wrap -m-4">
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaHome className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Vrsta Nekretnine:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.propertyType}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaBook className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Kvadratura:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.kvadratura}m2
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaMapMarkedAlt className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Opština:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.opstina}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+              <div className="container mx-auto mt-5 mb-2">
+                <div className="flex flex-wrap -m-4">
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaHome className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Vrsta Nekretnine:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.propertyType}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaBook className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Kvadratura:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.kvadratura}m2
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaMapMarkedAlt className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Opština:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.opstina}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
 
-<section className="text-gray-400 body-font">
-  <div className="container mx-auto mb-5">
-    <div className="flex flex-wrap -m-4">
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaFireAlt className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Tip Grejanja:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.heatingType}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaBuilding className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Sprat:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.sprat}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaDoorOpen className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Broj Soba:
-            </h2>
-            <p className="leading-relaxed text-base">
-              {listing.bathrooms}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section className="text-gray-400 body-font">
-  <div className="container mx-auto mb-5">
-    <div className="flex flex-wrap -m-4">
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaChair className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Opremljen:
-            </h2>
-            <p className="leading-relaxed text-base">
-            {listing.furnished ? "Opremljen" : "Neopremljen"}
-            </p>
-          </div>
-        </div>
-      </div>
-      
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaParking  className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Parking:
-            </h2>
-            <p className="leading-relaxed text-base">
-            {listing.parking ? "Parking Mesto" : "Nema Parking"}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaToilet  className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Kupatila:
-            </h2>
-            <p className="leading-relaxed text-base">
-            {listing.bedrooms}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="p-4 md:w-1/3 w-full">
-        <div className="bg-white rounded-lg flex items-center p-4">
-          <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
-          <FaToilet  className="text-lg"/>
-          </div>
-          <div className="flex-grow">
-            <h2 className="text-black font-medium text-lg title-font">
-              Struktura:
-            </h2>
-            <p className="leading-relaxed text-base">
-            {listing.struktura}
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-    {/* <MapContainer center={position} zoom={13}>
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            <Marker position={position}>
-                <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-            </Marker>
-        </MapContainer> */}
-  </div>
-</section>
-
-            {/* <p className="text-slate-800">
-              <span className="font-semibold text-black">Kvadratura: </span>
-              {listing.kvadratura}m2
-            </p>
-
-            <p className="text-slate-800">
-              <span className="font-semibold text-black">Opština: </span>
-              {listing.opstina}
-            </p>
-            <p className="text-slate-800">
-              <span className="font-semibold text-black">Vrsta grejanja: </span>
-              {listing.heatingType}
-            </p>
-            <p className="text-slate-800">
-              <span className="font-semibold text-black">Sprat: </span>
-              {listing.sprat}
-            </p>
-            <p className="text-slate-800">
-              <span className="font-semibold text-black">Broj soba: </span>
-              {listing.bathrooms}
-            </p> */}
-            {/* <ul className="text-superstan font-semibold text-sm flex flex-wrap items-center gap-4 sm:gap-6">
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <span className="font-semibold text-black">Ostalo: </span>
-              </li>
-
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaParking className="text-lg" />
-                {listing.parking ? "Parking Mesto" : "Nema Parking"}
-              </li>
-              <li className="flex items-center gap-1 whitespace-nowrap ">
-                <FaChair className="text-lg" />
-                {listing.furnished ? "Opremljen" : "Neopremljen"}
-              </li>
-            </ul> */}
-            
-            {/* <Contact listing={listing} /> */}
+            <section className="text-gray-400 body-font">
+              <div className="container mx-auto mb-5">
+                <div className="flex flex-wrap -m-4">
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaFireAlt className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Tip Grejanja:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.heatingType}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaBuilding className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Sprat:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.sprat}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaDoorOpen className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Broj Soba:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.bathrooms}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section className="text-gray-400 body-font">
+              <div className="container mx-auto mb-5">
+                <div className="flex flex-wrap -m-4">
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaChair className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Opremljen:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.furnished ? "Opremljen" : "Neopremljen"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaParking className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Parking:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.parking ? "Parking Mesto" : "Nema Parking"}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaToilet className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Kupatila:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.bedrooms}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4 md:w-1/3 w-full">
+                    {/* <div className="bg-white rounded-lg flex items-center p-4">
+                      <div className="w-12 h-12 flex items-center justify-center rounded-full bg-superstan text-white mr-4">
+                        <FaToilet className="text-lg" />
+                      </div>
+                      <div className="flex-grow">
+                        <h2 className="text-black font-medium text-lg title-font">
+                          Struktura:
+                        </h2>
+                        <p className="leading-relaxed text-base">
+                          {listing.struktura}
+                        </p>
+                      </div>
+                    </div> */}
+                  </div>
+                </div>
+                <MapContainer id="map" center={mapCenter} zoom={13}>
+                  <MapInvalidate />
+                  <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                  />
+                  <Marker position={mapCenter}>
+                    <Popup>
+                      {listing.address}
+                    </Popup>
+                  </Marker>
+                </MapContainer>
+              </div>
+            </section>
           </div>
         </div>
       )}
       <Footer></Footer>
     </main>
   );
+}
+
+// Function to fetch coordinates based on address
+async function getCoordinates(address) {
+  const response = await fetch(
+    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
+  );
+  const data = await response.json();
+
+  if (data.length > 0) {
+    const { lat, lon } = data[0];
+    return { lat: parseFloat(lat), lon: parseFloat(lon) };
+  } else {
+    throw new Error('Failed to get coordinates');
+  }
 }

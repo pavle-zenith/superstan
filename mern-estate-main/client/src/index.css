@@ -84,6 +84,14 @@ img {
     padding-right: 1.5rem !important;
   }
 }
+/* Add this CSS to your stylesheet or within a style block */
+#map {
+  margin-top: 50px;
+  height: 500px; /* Adjust the height as needed */
+  width: 100%;
+  border: #9f1d21 5px solid;
+}
+
 .spacer {
   margin-top:2rem;
   margin-bottom: 5rem;
