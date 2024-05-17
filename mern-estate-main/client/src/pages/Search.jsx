@@ -20,14 +20,19 @@ export default function Search() {
     offer: false,
     sort: 'created_at',
     order: 'desc',
+    minKvadratura: 0,
+    maxKvadratura: 0,
+    minCena: 0,
+    maxCena: 0,
   });
   const options = ['Čukarica','Novi Beograd','Paliula','Rakovica','Savski venac', 'Stari grad','Voždovac','Vračar','Zemun','Zvezdara','Barajevo','Grocka','Lazarevac','Mladenovac','Obrenovac','Sopot','Surčin'];
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
+
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
+    let urlParams = new URLSearchParams(location.search);
     const searchTermFromUrl = urlParams.get('searchTerm');
     const typeFromUrl = urlParams.get('type');
     const parkingFromUrl = urlParams.get('parking');
@@ -36,7 +41,23 @@ export default function Search() {
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');
     const opstinaFromUrl = urlParams.get('opstina');
-    const tipNekretnineFromUrl = urlParams.get('tipNekretnine');
+    const tipNekretnineFromUrl = urlParams.get('propertyType');
+    const minKvadraturaFromUrl = urlParams.get('min_kvadratura');
+    const maxKvadraturaFromUrl = urlParams.get('max_kvadratura');
+    const minCenaFromUrl = urlParams.get('min_cena');
+    const maxCenaFromUrl = urlParams.get('max_cena');
+
+    if (minKvadraturaFromUrl === '')
+      urlParams.set('min_kvadratura', 0);
+
+    if (maxKvadraturaFromUrl === '')
+      urlParams.set('max_kvadratura', 0);
+
+    if (minCenaFromUrl === '')
+      urlParams.set('min_cena', 0);
+
+    if (maxCenaFromUrl === '')
+      urlParams.set('max_cena', 0);
 
     if (
       searchTermFromUrl ||
@@ -47,7 +68,11 @@ export default function Search() {
       sortFromUrl ||
       orderFromUrl ||
       opstinaFromUrl || 
-      tipNekretnineFromUrl
+      tipNekretnineFromUrl ||
+      minKvadraturaFromUrl ||
+      maxKvadraturaFromUrl ||
+      minCenaFromUrl ||
+      maxCenaFromUrl
     ) {
       setSidebardata({
         searchTerm: searchTermFromUrl || '',
@@ -58,7 +83,11 @@ export default function Search() {
         sort: sortFromUrl || 'created_at',
         order: orderFromUrl || 'desc',
         opstina: opstinaFromUrl || '',
-        tipNekretnine: tipNekretnineFromUrl || '',
+        propertyType: tipNekretnineFromUrl || '',
+        minKvadratura: minKvadraturaFromUrl || 0,
+        maxKvadratura: maxKvadraturaFromUrl || 0,
+        minCena: minCenaFromUrl || 0,
+        maxCena: maxCenaFromUrl || 0,
       });
     }
 
@@ -110,8 +139,8 @@ export default function Search() {
           e.target.checked || e.target.checked === 'true' ? true : false,
       });
     }
-    if (e.target.id === 'tipNekretnine') {
-      setSidebardata({ ...sidebardata, tipNekretnine: e.target.value });
+    if (e.target.id === 'propertyType') {
+      setSidebardata({ ...sidebardata, propertyType: e.target.value });
     }
     if (e.target.id === 'sort_order') {
       const sort = e.target.value.split('_')[0] || 'created_at';
@@ -126,7 +155,42 @@ export default function Search() {
     setSidebardata({ ...sidebardata, opstina: e.target.value });
     // }
   }
-    // }
+
+    if (e.target.id === 'type') {
+      setSidebardata({ ...sidebardata, type: e.target.value });
+    }
+
+    if (e.target.id === 'min_kvadratura') {
+      let targetValue = e.target.value;
+      if (targetValue === '') {
+        targetValue = 0;
+      }
+      setSidebardata({ ...sidebardata, minKvadratura: targetValue });
+    }
+
+    if (e.target.id === 'max_kvadratura') {
+      let targetValue = e.target.value;
+      if (targetValue === '') {
+        targetValue = 0;
+      }
+      setSidebardata({ ...sidebardata, maxKvadratura: targetValue });
+    }
+
+    if (e.target.id === 'min_cena') {
+      let targetValue = e.target.value;
+      if (targetValue === '') {
+        targetValue = 0;
+      }
+      setSidebardata({ ...sidebardata, minCena: targetValue });
+    }
+
+    if (e.target.id === 'max_cena') {
+      let targetValue = e.target.value;
+      if (targetValue === '') {
+        targetValue = 0;
+      }
+      setSidebardata({ ...sidebardata, maxCena: targetValue });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -140,7 +204,11 @@ export default function Search() {
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
     urlParams.set('opstina', sidebardata.opstina);
-    urlParams.set('tipNekretnine', sidebardata.tipNekretnine);
+    urlParams.set('propertyType', sidebardata.propertyType);
+    urlParams.set('min_kvadratura', sidebardata.minKvadratura);
+    urlParams.set('max_kvadratura', sidebardata.maxKvadratura);
+    urlParams.set('min_cena', sidebardata.minCena);
+    urlParams.set('max_cena', sidebardata.maxCena);
     const searchQuery = urlParams.toString();
     navigate(`/nekretnine?${searchQuery}`);
   };
@@ -186,37 +254,22 @@ export default function Search() {
             />
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
-            <label className='font-semibold'>Tip Usluge:</label>
-            {/* <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='all'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'all'}
-              />
-              <span>Iznajmljivanje i Prodaja</span>
-            </div> */}
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='Iznajmljivanje'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'Iznajmljivanje'}
-              />
-              <span>Iznajmljivanje</span>
-            </div>
-            <div className='flex gap-2'>
-              <input
-                type='checkbox'
-                id='Prodaja'
-                className='w-5'
-                onChange={handleChange}
-                checked={sidebardata.type === 'Prodaja'}
-              />
-              <span>Prodaja</span>
-            </div>
+          <label className="flex md:flex-row pr-4 items-center gap-5 w-full">
+        <span className="whitespace-nowrap font-semibold">Tip Usluge: </span>
+            
+                    <select
+          className="rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
+          id="type"
+          onChange={handleChange}
+          defaultValue={''}
+          
+        >
+          <option selected value='all'>Sve usluge</option>
+          <option value={'Iznajmljivanje'}>Iznajmljivanje</option>
+          <option value={'Prodaja'}>Prodaja</option>
+        </select>
+        </label>
+
             {/* <div className='flex gap-2'>
               <input
                 type='checkbox'
@@ -253,7 +306,7 @@ export default function Search() {
           </div>
           <div className='flex gap-2 flex-wrap items-center'>
           {/* <MultiSelectDropdown options={options} /> */}
-          <label className="flex flex-col md:flex-row pr-4 items-center gap-5 w-full">
+          <label className="flex md:flex-row pr-4 items-center gap-5 w-full">
         <span className="whitespace-nowrap font-semibold">Opština: </span>
         <select
           className="rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full"
@@ -293,7 +346,7 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id=''
+              id='min_kvadratura'
               placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               
@@ -304,7 +357,7 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id='searchTerm'
+              id='max_kvadratura'
               placeholder='max'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
@@ -320,18 +373,18 @@ export default function Search() {
             </label>
             <input
               type='number'
-              id='min_kvadratura' 
+              id='min_cena'
               placeholder='min'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
-              // onChange={handleChange}
+              onChange={handleChange}
             />
             <label className='whitespace-nowrap font-semibold'>
             €
             </label>
             <input
               type='number'
-              id='searchTerm'
+              id='max_cena'
               placeholder='max'
               className='border rounded-lg p-3 w-3/12'
               // value={sidebardata.searchTerm}
@@ -345,8 +398,8 @@ export default function Search() {
             <label className='font-semibold'>Tip:</label>
             <select
               onChange={handleChange}
-              defaultValue={''}
-              id='tipNekretnine'
+              defaultValue={'all'}
+              id='propertyType'
               className='rounded-lg p-3 bg-white border border-gray-300 text-gray-700 py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 w-full'
             >
               <option selected value='all'>Izaberi tip</option>

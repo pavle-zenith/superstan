@@ -4,6 +4,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore from "swiper";
 import { useSelector } from "react-redux";
 import { Navigation } from "swiper/modules";
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import L from 'leaflet';
 import Footer from "./Footer";
 import "swiper/css/bundle";
 import {
@@ -62,7 +64,7 @@ export default function Listing() {
   function handleCall() {
     window.location.href = 'tel:+38163413113';
   }
-  
+  const position = [51.505, -0.09];
   return (
     <main>
       {loading && <p className="text-center my-7 text-2xl">Učitavanje...</p>}
@@ -314,6 +316,17 @@ export default function Listing() {
         </div>
       </div>
     </div>
+    {/* <MapContainer center={position} zoom={13}>
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={position}>
+                <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+            </Marker>
+        </MapContainer> */}
   </div>
 </section>
 
