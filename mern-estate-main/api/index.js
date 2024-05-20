@@ -23,11 +23,7 @@ mongoose
 
 const app = express();
 
-const corsOptions = {
-  origin: 'https://www.superstanbg.rs'
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json());
 
