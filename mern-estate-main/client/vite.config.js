@@ -6,7 +6,7 @@ import { defineConfig, loadEnv } from 'vite'
 export default defineConfig(({ command, mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
-  console.log("ENV VARS:" , env.API_URL)
+  console.log("ENV VARS:" , env.VITE_API_URL)
   return {
 
     server: {
@@ -17,8 +17,9 @@ export default defineConfig(({ command, mode }) => {
 
       proxy: {
         '/api': {
-          target: env.API_URL,
-          secure: false,
+          target: env.VITE_API_URL,
+          changeOrigin: true,
+          secure: env.VITE_API_SECURE === 'true',
         },
       },
     },

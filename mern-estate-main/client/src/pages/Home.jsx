@@ -67,7 +67,7 @@ export default function Home() {
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?offer=true&limit=4");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/get?offer=true&limit=4`);
         const data = await res.json();
         setOfferListings(data);
         fetchRentListings();
@@ -77,7 +77,7 @@ export default function Home() {
     };
     const fetchRentListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?type=Iznajmljivanje&limit=3");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/get?type=Iznajmljivanje&limit=3`);
         const data = await res.json();
         console.log("xd")
         console.log(data);
@@ -91,7 +91,7 @@ export default function Home() {
 
     const fetchSaleListings = async () => {
       try {
-        const res = await fetch("/api/listing/get?type=Prodaja&limit=3");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/get?type=Prodaja&limit=3`);
         const data = await res.json();
         setSaleListings(data);
       } catch (error) {
