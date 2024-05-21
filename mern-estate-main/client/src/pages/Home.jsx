@@ -57,13 +57,11 @@ export default function Home() {
       // if(e.target.value === 'Stan' || e.target.value === 'Kuća'){
     setSidebardata({ ...sidebardata, opstina: e.target.value });
     // }
-    console.log(sidebardata);
   }
     // }
 
   };
   
-  // console.log(offerListings);
   useEffect(() => {
     const fetchOfferListings = async () => {
       try {
@@ -79,8 +77,6 @@ export default function Home() {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/get?type=Iznajmljivanje&limit=3`);
         const data = await res.json();
-        console.log("xd")
-        console.log(data);
         setRentListings(data);
         fetchSaleListings();
         
@@ -99,7 +95,6 @@ export default function Home() {
       }
     };
     fetchOfferListings();
-    console.log(rentListings)
   }, []);
   return (
     <div>
@@ -329,9 +324,7 @@ export default function Home() {
                   Brzo i sigurno prodajte i izdajte svoju nekretninu
                 </p>
                 <p className="mt-6 text-lg leading-8 text-gray-600">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Maiores impedit perferendis suscipit eaque, iste dolor
-                  cupiditate blanditiis ratione.
+                Superstan je renomirana agencija za nekretnine sa sedištem u Beogradu, specijalizovana za prodaju, izdavanje i upravljanje nekretninama. Osnovana sa ciljem pružanja visokokvalitetnih usluga, Superstan se ponosi svojim profesionalnim pristupom, stručnim timom agenata i posvećenošću zadovoljstvu klijenata. Bez obzira da li tražite stan za iznajmljivanje, kuću za kupovinu ili investirate u komercijalne nekretnine, Superstan vam nudi sveobuhvatnu podršku kroz ceo proces. 
                 </p>
                 <dl className="mt-5 max-w-xl space-y-8 text-base leading-7 text-gray-600 lg:max-w-none">
                   {features.map((feature) => (

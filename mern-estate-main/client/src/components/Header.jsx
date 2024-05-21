@@ -27,7 +27,6 @@ export default function Header() {
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
-        console.log("Menu toggled", !isMenuOpen); // Debug: Check if the state is updating
     }
 
     return (

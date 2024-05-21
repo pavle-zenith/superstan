@@ -81,7 +81,6 @@ export default function CreateListing() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log(`${progress}% Učitano`);
         },
         (error) => {
           reject(error);
@@ -111,7 +110,6 @@ export default function CreateListing() {
   //   }
 
   
-  //   console.log(e.target.type)
 
   //   if (
   //     e.target.type === 'number' ||
@@ -128,7 +126,6 @@ export default function CreateListing() {
   //       [e.target.id]: e.target.value,
   //     });
   //   }
-  //   console.log(formData);
   // };
   const handleChange = (e) => {
     const { id, value, type, checked } = e.target;
@@ -141,7 +138,6 @@ export default function CreateListing() {
       };
   
       // Log the new state value after the state update
-      console.log(id, newFormData[id]);
   
       return newFormData;
     });
