@@ -55,7 +55,9 @@ export default function Listing() {
 
         // Fetch coordinates for the listing address
         const coordinates = await getCoordinates(data.address);
-        setMapCenter([coordinates.lat, coordinates.lon]);
+        if(coordinates?.lat) {
+          setMapCenter([coordinates.lat, coordinates.lon]);
+        }
       } catch (error) {
         setError(true);
         setLoading(false);
@@ -331,15 +333,18 @@ export default function Listing() {
 
 // Function to fetch coordinates based on address
 async function getCoordinates(address) {
-  const response = await fetch(
-    `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
-  );
-  const data = await response.json();
+  let data;
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
+    );
+    data = await response.json();
+  } catch (error) {
+    return;
+  }
 
   if (data.length > 0) {
     const { lat, lon } = data[0];
     return { lat: parseFloat(lat), lon: parseFloat(lon) };
-  } else {
-    throw new Error('Failed to get coordinates');
   }
 }
