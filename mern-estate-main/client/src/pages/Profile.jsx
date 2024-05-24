@@ -114,19 +114,19 @@ export default function Profile() {
 
   const handleSignOut = async () => {
     try {
-      console.log("pokrenulo se");
+      // console.log("pokrenulo se");
       dispatch(signOutUserStart());
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/signout`);
       const data = await res.json();
-      console.log(res);
-      console.log(data);
+      // console.log(res);
+      // console.log(data);
       if (!res.ok) {
-        console.log("ovaj if blokira");
+        // console.log("ovaj if blokira");
         dispatch(signOutUserFailure(data.message));
         return;
       }
       dispatch(signOutUserSuccess(data));
-      console.log("izlgovoan");
+      // console.log("izlgovoan");
       navigate('/prijava', { replace: true });
       // Navigate('/prijava');
     } catch (error) {
@@ -141,15 +141,15 @@ export default function Profile() {
         credentials: 'include'
       });
       const data = await res.json();
-      console.log("test");
-      console.log(data);
+      // console.log("test");
+      // console.log(data);
       // if (!data.success) {
       //   setShowListingsError(true);
       //   return;
       // }
       setUserListings(data);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       setShowListingsError(true);
     }
   };
@@ -174,7 +174,7 @@ export default function Profile() {
           });
           const data = await res.json();
           if (!data.success) {
-            console.log(data.message);
+            // console.log(data.message);
             return;
           }
           
@@ -187,7 +187,7 @@ export default function Profile() {
       });
       
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
     }
   };
 

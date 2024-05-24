@@ -160,7 +160,7 @@ export const getListings = async (req, res, next) => {
       };
     }
 
-    let propertyType = req.query.tipNekretnine;
+    let propertyType = req.query.propertyType;
     if (propertyType === undefined || propertyType === 'all') {
       propertyType = { $in: ['Stan', 'Kuća'] };
     }

@@ -46,7 +46,7 @@ export default function CreateListing() {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/get/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
+        // console.log(data.message);
         return;
       }
       setFormData(data);
@@ -156,7 +156,7 @@ export default function CreateListing() {
       };
   
       // Log the new state value after the state update
-      console.log(id, newFormData[id]);
+      // console.log(id, newFormData[id]);
   
       return newFormData;
     });

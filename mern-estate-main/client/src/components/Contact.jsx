@@ -15,7 +15,7 @@ export default function Contact({ listing }) {
         const data = await res.json();
         setLandlord(data);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     fetchLandlord();

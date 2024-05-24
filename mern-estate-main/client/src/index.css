@@ -45,7 +45,9 @@ a {
 .cenaDetail {
   top:0;
 }
-
+.searchWidthFix {
+  min-width: 480px;
+}
 .cena, .cenaDetail {
   position: absolute;
   color: #fff;

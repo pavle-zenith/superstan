@@ -92,7 +92,7 @@ export default function Search() {
     }
 
     if (urlParams.get('search')) {
-      console.log('search');
+      // console.log('search');
     }
 
     const fetchListings = async () => {
@@ -238,7 +238,7 @@ export default function Search() {
             >
                 Detaljna Pretraga
             </button>
-    <div className={`${isFormVisible ? 'block' : 'hidden'} p-7 sticky top-15 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4 sm:block`}>
+    <div className={`${isFormVisible ? 'block' : 'hidden'} searchWidthFix p-7 sticky top-15 border-b-2 lg:border-r-2 lg:min-h-screen lg:w-1/4 sm:block`}>
     <form onSubmit={handleSubmit} className='sticky top-8 flex flex-col gap-8'>
           <div className='flex items-center gap-2'>
             <label className='whitespace-nowrap font-semibold'>

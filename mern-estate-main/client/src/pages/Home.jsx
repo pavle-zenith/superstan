@@ -70,7 +70,7 @@ export default function Home() {
         setOfferListings(data);
         fetchRentListings();
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
     const fetchRentListings = async () => {
@@ -81,7 +81,7 @@ export default function Home() {
         fetchSaleListings();
         
       } catch (error) {
-        console.log(error);
+        // console.log(error);
       }
     };
 
