@@ -137,7 +137,9 @@ export default function Profile() {
   const handleShowListings = async () => {
     try {
       setShowListingsError(false);
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/listings/${currentUser._id}`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/user/listings/${currentUser._id}`, {
+        credentials: 'include'
+      });
       const data = await res.json();
       console.log("test");
       console.log(data);
@@ -168,6 +170,7 @@ export default function Profile() {
           Swal.fire("Nekretnina uspešno izbrisana!", "", "Uspešno brisanje");
           const res = await fetch(`${import.meta.env.VITE_API_URL}/api/listing/delete/${listingId}`, {
             method: 'DELETE',
+            credentials: 'include'
           });
           const data = await res.json();
           if (!data.success) {
