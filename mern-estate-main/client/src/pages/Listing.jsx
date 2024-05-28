@@ -218,10 +218,10 @@ export default function Listing() {
                       </div>
                       <div className="flex-grow">
                         <h2 className="text-black font-medium text-lg title-font">
-                          Sprat:
+                          Spratnost:
                         </h2>
                         <p className="leading-relaxed text-base">
-                          {listing.sprat}
+                          {listing.struktura}
                         </p>
                       </div>
                     </div>

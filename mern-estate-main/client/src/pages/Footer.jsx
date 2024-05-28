@@ -127,7 +127,7 @@ export default function footer() {
     <p className="text-xs text-gray-500">
       © 2024. Super Stan d.o.o PIB: 114115868
           Matični Broj: 673353350
-          | Powered by <a href="https://www.9320.tech/">Tech9320</a> 
+          | Powered by <a href="https://www.9320.tech/">techtonnik</a> 
     </p>
   </div>
 </footer>

@@ -432,7 +432,10 @@ export default function Search() {
     <h1 className='text-3xl rezultati font-semibold border-b p-3 text-slate-700 mt-5 lg:mt-0'>
       Rezultati pretrage:
     </h1>
-    <div className='p-7 grid karte grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:gap-2 gap-4'>
+    <div className='p-7 grid karte gap-4'>
+
+
+
       {!loading && listings.length === 0 && (
         <p className='text-xl text-slate-700'>Nije pronađena nijedna nekretnina!</p>
       )}
@@ -444,7 +447,7 @@ export default function Search() {
       {!loading &&
         listings &&
         listings.map((listing) => (
-          <div key={listing._id} className=''>
+          <div key={listing._id} style={{width:"auto !important"}} className='test'>
             <ListingItem listing={listing} />
           </div>
         ))}
